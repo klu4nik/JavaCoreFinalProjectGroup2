@@ -9,11 +9,11 @@ public class User {
     private String login;
     private String password;
 
-    public User(String firsName, String lastName, String login, String password) throws NoSuchAlgorithmException {
+    public User(String firsName, String lastName, String login, String password) {
         this.firsName = firsName;
         this.lastName = lastName;
         this.login = login;
-        this.password = new PasswordHashGenerator().generate(password);
+        this.password = password;
     }
 
     public String getFirsName() {
@@ -37,6 +37,6 @@ public class User {
         return "firsName='" + firsName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
-                ", password='" + password+ '\'';
+                ", password='" + password + '\'';
     }
 }

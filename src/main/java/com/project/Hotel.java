@@ -10,7 +10,6 @@ public class Hotel {
         this.hotelName = hotelName;
         this.city = city;
         this.id = this.hashCode();
-
     }
 
     @Override

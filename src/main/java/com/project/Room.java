@@ -12,25 +12,25 @@ public class Room {
     private Date dateOfBookingStart;
     private Date dateOfBookingFinish;
 
-    public Room(Hotel hotel, Integer numberOfperson, Integer price) {
+    public Room(Hotel hotel, Integer id, Integer numberOfPerson, Integer price) {
         this.hotel = hotel;
-        this.numberOfperson = numberOfperson;
+        this.numberOfperson = numberOfPerson;
         this.price = price;
-        this.id = this.hashCode();
+        this.id = id;
         this.reservedForUser = null;
-        this.dateOfBookingStart = dateOfBookingStart;  //
-        this.dateOfBookingFinish = dateOfBookingFinish;//
+//        this.dateOfBookingStart = dateOfBookingStart;  //
+//        this.dateOfBookingFinish = dateOfBookingFinish;//
 
     }
 
-    public Room(Hotel hotel, Integer numberOfperson, Integer price, User reservedForUser, Date dateOfBookingStart, Date dateOfBookingFinish) {
+    public Room(Hotel hotel, Integer id, Integer numberOfperson, Integer price, User reservedForUser, Date dateOfBookingStart, Date dateOfBookingFinish) {
         this.hotel = hotel;
         this.numberOfperson = numberOfperson;
         this.price = price;
         this.reservedForUser = reservedForUser;
         this.dateOfBookingStart = dateOfBookingStart;
         this.dateOfBookingFinish = dateOfBookingFinish;
-        this.id = this.hashCode();
+        this.id = id;
     }
 
     public Integer getId() {
@@ -68,6 +68,7 @@ public class Room {
 
         Room room = (Room) o;
 
+        if (!id.equals(room.id)) return false;
         if (!hotel.equals(room.hotel)) return false;
         if (!numberOfperson.equals(room.numberOfperson)) return false;
         return price.equals(room.price);
@@ -75,7 +76,8 @@ public class Room {
 
     @Override
     public int hashCode() {
-        int result = hotel.hashCode();
+        int result = id.hashCode();
+        result = 31 * result + hotel.hashCode();
         result = 31 * result + numberOfperson.hashCode();
         result = 31 * result + price.hashCode();
         return result;

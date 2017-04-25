@@ -1,3 +1,5 @@
+package main.java.com.project;
+
 import java.security.NoSuchAlgorithmException;
 
 /**

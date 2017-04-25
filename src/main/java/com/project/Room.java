@@ -1,3 +1,8 @@
+package main.java.com.project;
+
+import main.java.com.project.Hotel;
+import main.java.com.project.User;
+
 import java.util.Date;
 
 /**

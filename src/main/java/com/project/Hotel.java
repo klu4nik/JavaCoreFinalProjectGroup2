@@ -1,3 +1,5 @@
+package main.java.com.project;
+
 /**
  * Created by MYKOLA.GOROKHOV on 21.04.2017.
  */

@@ -1,3 +1,7 @@
+package main.java.com.project;
+
+import main.java.com.project.DAO_Users_Impl;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -6,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import main.java.com.project.DAO_Hotels_Impl;
 
 /**
  * Created by MYKOLA.GOROKHOV on 20.04.2017.

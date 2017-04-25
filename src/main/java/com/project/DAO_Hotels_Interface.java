@@ -1,3 +1,7 @@
+package main.java.com.project;
+
+import main.java.com.project.Hotel;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

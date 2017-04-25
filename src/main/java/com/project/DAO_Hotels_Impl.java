@@ -1,3 +1,5 @@
+package main.java.com.project;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,6 +9,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import main.java.com.project.DAO_Hotels_Interface;
+import main.java.com.project.Hotel;
 
 /**
  * Created by MYKOLA.GOROKHOV on 23.04.2017.

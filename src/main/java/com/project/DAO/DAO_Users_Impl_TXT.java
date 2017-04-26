@@ -22,31 +22,15 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
     public HashMap<String, User> get() throws IOException {
 //        Читаем файл построчно
         List<String> currentUsers = null;
-        try {
-            currentUsers = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.getMessage();
-        }
+        currentUsers = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
 //        Описываем вид результата
         HashMap<String, User> result = new HashMap<String, User>();
 //        бъем каждую cторку на поля
         for (String str : currentUsers) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             String login = stringTokenizer.nextToken();
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             String firsName = stringTokenizer.nextToken();
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             String lastName = stringTokenizer.nextToken();
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             String password = stringTokenizer.nextToken();
             result.put(login, new User(firsName, lastName, login, password));
         }

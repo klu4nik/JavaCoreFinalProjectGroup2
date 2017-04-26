@@ -46,36 +46,14 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
 //        бъем каждую cторку на поля
         for (String str : currentRoom) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             Integer hotelid = Integer.valueOf(stringTokenizer.nextToken());
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             Integer roomid = Integer.valueOf(stringTokenizer.nextToken());
-
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             Integer numberOfPerson = Integer.valueOf(stringTokenizer.nextToken());
-
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             Integer price = Integer.valueOf(stringTokenizer.nextToken());
 
             if (stringTokenizer.hasMoreTokens()) {
                 String userLogin = stringTokenizer.nextToken();
-
-                if (!stringTokenizer.hasMoreTokens()) {
-                    throw new IOException("File have incorrect data");
-                }
                 Long bookingStartData = Long.valueOf(stringTokenizer.nextToken());
-
-                if (!stringTokenizer.hasMoreTokens()) {
-                    throw new IOException("File have incorrect data");
-                }
                 Long bookingEndData = Long.valueOf(stringTokenizer.nextToken());
 
                 User userForRoom = new User(usersFromFile.get(userLogin).getFirsName(), usersFromFile.get(userLogin).getLastName(),

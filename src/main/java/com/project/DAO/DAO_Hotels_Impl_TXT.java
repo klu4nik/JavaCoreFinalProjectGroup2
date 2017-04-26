@@ -25,25 +25,15 @@ public class DAO_Hotels_Impl_TXT implements DAO<HashMap<Integer, Hotel>> {
     public HashMap<Integer, Hotel> get() throws IOException {
 //        Читаем файл построчно
         List<String> currentHotel = null;
-        try {
-            currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.getMessage();
-        }
+        currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
+
 //        Описываем вид результата
         HashMap<Integer, Hotel> result = new HashMap<Integer, Hotel>();
 //        бъем каждую cторку на поля
         for (String str : currentHotel) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             String hotelName = stringTokenizer.nextToken();
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
             String cityHotel = stringTokenizer.nextToken();
-
             Hotel nextHotel = new Hotel(hotelName, cityHotel);
             result.put(nextHotel.getId(), nextHotel);
         }

@@ -1,9 +1,12 @@
+package Entity;
+
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by MYKOLA.GOROKHOV on 20.04.2017.
  */
-public class User {
+public class User implements Serializable {
     private String firsName;
     private String lastName;
     private String login;
@@ -32,11 +35,14 @@ public class User {
         return password;
     }
 
+
     @Override
     public String toString() {
-        return "firsName='" + firsName + '\'' +
+        return "User{" +
+                "login='" + login + '\'' +
+                ", firstName='" + firsName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'';
+                ", password='" + password + '\'' +
+                '}'+"\n";
     }
 }

@@ -1,7 +1,11 @@
+package Entity;
+
+import java.io.Serializable;
+
 /**
  * Created by MYKOLA.GOROKHOV on 21.04.2017.
  */
-public class Hotel {
+public class Hotel implements Serializable {
     private Integer id;
     private String hotelName;
     private String city;
@@ -14,10 +18,11 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return
+        return "Hotel{" +
                 "id=" + id +
-                        ", hotelName='" + hotelName + '\'' +
-                        ", city='" + city + '\'';
+                ", hotelName='" + hotelName + '\'' +
+                ", city='" + city + '\'' +
+                '}'+"\n";
     }
 
     public Integer getId() {

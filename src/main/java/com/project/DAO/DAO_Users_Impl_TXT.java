@@ -1,8 +1,12 @@
+package DAO;
+
+import DAO.DAO;
+import Entity.User;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -10,12 +14,12 @@ import java.util.StringTokenizer;
 /**
  * Created by MYKOLA.GOROKHOV on 22.04.2017.
  */
-public class DAO_Users_Impl implements DAO_Users_Interface {
+public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
     final static String PATH = "../Users";
     final static char SEPARATOR = (char) 29;
 
     @Override
-    public HashMap<String, User> getUsers() throws IOException {
+    public HashMap<String, User> get() throws IOException {
 //        Читаем файл построчно
         List<String> currentUsers = null;
         try {
@@ -31,15 +35,15 @@ public class DAO_Users_Impl implements DAO_Users_Interface {
             if (!stringTokenizer.hasMoreTokens()) {
                 throw new IOException("File have incorrect data");
             }
+            String login = stringTokenizer.nextToken();
+            if (!stringTokenizer.hasMoreTokens()) {
+                throw new IOException("File have incorrect data");
+            }
             String firsName = stringTokenizer.nextToken();
             if (!stringTokenizer.hasMoreTokens()) {
                 throw new IOException("File have incorrect data");
             }
             String lastName = stringTokenizer.nextToken();
-            if (!stringTokenizer.hasMoreTokens()) {
-                throw new IOException("File have incorrect data");
-            }
-            String login = stringTokenizer.nextToken();
             if (!stringTokenizer.hasMoreTokens()) {
                 throw new IOException("File have incorrect data");
             }
@@ -51,7 +55,7 @@ public class DAO_Users_Impl implements DAO_Users_Interface {
 
 
     @Override
-    public void setUsers(HashMap<String, User> hashMapUsers) {
+    public void set(HashMap<String, User> hashMapUsers) {
         File usersFile = new File(PATH);
 
         try (FileWriter writer = new FileWriter(usersFile)) {

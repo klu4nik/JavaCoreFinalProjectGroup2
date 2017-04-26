@@ -1,3 +1,5 @@
+package Util;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -10,7 +12,12 @@ public class PasswordHashGenerator {
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         byte[] passBytes = password.getBytes();
         byte[] passHash = sha256.digest(passBytes);
-        return passHash.toString();
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < passHash.length; i++) {
+            hexString.append(Integer.toString(0xFF & passHash[i]));
+        }
+
+        return hexString.toString();
     }
 
 

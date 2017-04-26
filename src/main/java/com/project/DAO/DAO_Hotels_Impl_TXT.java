@@ -1,3 +1,8 @@
+package DAO;
+
+import DAO.DAO;
+import Entity.Hotel;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,14 +16,14 @@ import java.util.StringTokenizer;
 /**
  * Created by MYKOLA.GOROKHOV on 23.04.2017.
  */
-public class DAO_Hotels_Impl implements DAO_Hotels_Interface {
+public class DAO_Hotels_Impl_TXT implements DAO<HashMap<Integer, Hotel>> {
     final static String PATH = "../Hotels";
     final static char SEPARATOR = (char) 29;
 
 
     @Override
-    public HashMap<Integer, Hotel> getHotels() throws IOException {
-        //        Читаем файл построчно
+    public HashMap<Integer, Hotel> get() throws IOException {
+//        Читаем файл построчно
         List<String> currentHotel = null;
         try {
             currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
@@ -43,12 +48,10 @@ public class DAO_Hotels_Impl implements DAO_Hotels_Interface {
             result.put(nextHotel.getId(), nextHotel);
         }
         return result;
-
-
     }
 
     @Override
-    public void setHotels(HashMap<Integer, Hotel> hashMapHotels) {
+    public void set(HashMap<Integer, Hotel> hashMapHotels) {
         File hotelsFile = new File(PATH);
 
         try (FileWriter writer = new FileWriter(hotelsFile)) {

@@ -1,11 +1,11 @@
+import API.API_Users;
+import API.MainMenu;
 import DAO.*;
 import Entity.Hotel;
 import Entity.Room;
 import Entity.User;
 import Util.PasswordHashGenerator;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -24,30 +24,33 @@ public class TestMain {
 //        }
 
 
-        TestMain.fileGenerator();
-
-
-        DAO_Users_Impl dui = new DAO_Users_Impl();
-        DAO_Hotels_Impl dhi = new DAO_Hotels_Impl();
-        DAO_Rooms_Impl dri = new DAO_Rooms_Impl();
-
-        DAO_Users_Impl_TXT dui_TXT = new DAO_Users_Impl_TXT();
-        DAO_Hotels_Impl_TXT dhi_TXT = new DAO_Hotels_Impl_TXT();
-        DAO_Rooms_Impl_TXT dri_TXT = new DAO_Rooms_Impl_TXT();
-
-        dui_TXT.set(dui.get());
-        dhi_TXT.set(dhi.get());
-        dri_TXT.set(dri.get());
+//        TestMain.fileGenerator();
+//
+//
+//        DAO_Users_Impl dui = new DAO_Users_Impl();
+//        DAO_Hotels_Impl dhi = new DAO_Hotels_Impl();
+//        DAO_Rooms_Impl dri = new DAO_Rooms_Impl();
+//
+//        DAO_Users_Impl_TXT dui_TXT = new DAO_Users_Impl_TXT();
+//        DAO_Hotels_Impl_TXT dhi_TXT = new DAO_Hotels_Impl_TXT();
+//        DAO_Rooms_Impl_TXT dri_TXT = new DAO_Rooms_Impl_TXT();
+//
+//        dui_TXT.set(dui.get());
+//        dhi_TXT.set(dhi.get());
+//        dri_TXT.set(dri.get());
 
 //        System.out.println(dui_TXT.get());
 //        System.out.println(dhi_TXT.get());
-        System.out.println(dri_TXT.get());
-
+//        System.out.println(dri_TXT.get());
 
 
 //        System.out.println(dui.get());
 //        System.out.println(dhi.get());
 //        System.out.println(dri.get());
+
+
+        new MainMenu().run();
+//        new API_Users().run();
 
 
     }
@@ -58,9 +61,9 @@ public class TestMain {
         HashMap hm = new HashMap<String, User>();
         User userforRoom = null;
         for (int i = 1; i <= 100; i++) {
-            User newUser = new User("First Name" + i, "Last Name" + i, "Login" + i, new PasswordHashGenerator().generate(("pass" + i)));
+            User newUser = new User("First Name" + i, "Last Name" + i, "Login" + i, PasswordHashGenerator.generate(("pass" + i)));
             hm.put(newUser.getLogin(), newUser);
-            userforRoom=newUser;
+            userforRoom = newUser;
         }
 
         dui.set(hm);
@@ -81,10 +84,10 @@ public class TestMain {
 
 //                пофиг, что выполняеться несколко раз
                 Room testRoom = new Room(newHotel, 6, 2, 200,
-                       userforRoom
+                        userforRoom
                         , new Date(15), new Date(50));
 
-                roo.put(testRoom.hashCode(),testRoom);
+                roo.put(testRoom.hashCode(), testRoom);
 
             }
         }
@@ -93,8 +96,5 @@ public class TestMain {
         dhi.set(hot);
 
     }
-
-
-
 }
 

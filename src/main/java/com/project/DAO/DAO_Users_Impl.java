@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Created by MYKOLA.GOROKHOV on 22.04.2017.
  */
 public class DAO_Users_Impl implements DAO<HashMap<String, User>> {
-    final static String PATH = "../JavaCoreFinalProjectGroup2/src/main/java/com/project/DB/Users";
+    final static String PATH = "../JavaCoreFinalProjectGroup2/ext/DB/Users";
 
     @Override
     public HashMap<String, User> get() throws IOException, ClassNotFoundException {

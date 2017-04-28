@@ -29,7 +29,7 @@ public class DAO_Hotels_Impl_TXT implements DAO<HashMap<Integer, Hotel>> {
 
 //        Описываем вид результата
         HashMap<Integer, Hotel> result = new HashMap<Integer, Hotel>();
-//        бъем каждую cторку на поля
+//        бъем каждую cтроку на поля
         for (String str : currentHotel) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
             String hotelName = stringTokenizer.nextToken();

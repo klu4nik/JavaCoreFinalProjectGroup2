@@ -29,7 +29,7 @@ public class MainMenu {
                     new API_Users().run();
                     break;
                 case ITEM_2:
-//                  new API_Hotels().run();
+                  new API_Hotels().run();
                     break;
                 case ITEM_3:
 //                 new API_Rooms().run();

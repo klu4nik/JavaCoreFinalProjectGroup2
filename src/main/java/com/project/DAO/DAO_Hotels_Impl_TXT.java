@@ -1,6 +1,5 @@
 package DAO;
 
-import DAO.DAO;
 import Entity.Hotel;
 
 import java.io.File;
@@ -25,7 +24,11 @@ public class DAO_Hotels_Impl_TXT implements DAO<HashMap<Integer, Hotel>> {
     public HashMap<Integer, Hotel> get() throws IOException {
 //        Читаем файл построчно
         List<String> currentHotel = null;
-        currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
+        try {
+            currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            System.out.println("Impossible to read the file: " + PATH);
+        }
 
 //        Описываем вид результата
         HashMap<Integer, Hotel> result = new HashMap<Integer, Hotel>();

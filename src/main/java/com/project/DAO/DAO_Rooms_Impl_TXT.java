@@ -1,6 +1,5 @@
 package DAO;
 
-import DAO.DAO;
 import Entity.Hotel;
 import Entity.Room;
 import Entity.User;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -25,13 +23,22 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
 
     @Override
     public HashMap<Integer, Room> get() throws IOException {
+
 //        читаем список отелей
-        HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
-        hotelsFromFile = new DAO_Hotels_Impl_TXT().get();
+            HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
+        try {
+            hotelsFromFile = new DAO_Hotels_Impl_TXT().get();
+        } catch (IOException e) {
+            System.out.println("Impossible to read the file: " + PATH);
+        }
 
 //        читаем список Пользователей
-        HashMap<String, User> usersFromFile = new HashMap<String, User>();
-        usersFromFile = new DAO_Users_Impl_TXT().get();
+            HashMap<String, User> usersFromFile = new HashMap<String, User>();
+        try {
+            usersFromFile = new DAO_Users_Impl_TXT().get();
+        } catch (IOException e) {
+            System.out.println("Impossible to read the file: " + PATH);
+        }
 
 
 //        Читаем файл построчно
@@ -43,7 +50,7 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
         }
 //        Описываем вид результата
         HashMap<Integer, Room> result = new HashMap<Integer, Room>();
-//        бъем каждую cторку на поля
+//        бъем каждую cтроку на поля
         for (String str : currentRoom) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
             Integer hotelid = Integer.valueOf(stringTokenizer.nextToken());

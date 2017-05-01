@@ -14,27 +14,38 @@ public class DAO_Rooms_Impl implements DAO<HashMap<Integer, Room>> {
 
     @Override
     public HashMap<Integer, Room> get() throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream(PATH);
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(PATH);
 
-        HashMap<Integer, Room> result = (HashMap<Integer, Room>) objectInputStream.readObject();
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-        objectInputStream.close();
-        fileInputStream.close();
+            HashMap<Integer, Room> result = (HashMap<Integer, Room>) objectInputStream.readObject();
 
-        return result;
+            objectInputStream.close();
+            fileInputStream.close();
+
+            return result;
+        } catch (IOException e) {
+            System.out.println("Impossible to read the file: " + PATH);
+            return null;
+        }
     }
 
     @Override
     public void set(HashMap<Integer, Room> hashMapRoom) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream(PATH);
-        ObjectOutputStream mapOutputStream = new ObjectOutputStream(fileOutputStream);
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(PATH);
 
-        mapOutputStream.writeObject(hashMapRoom);
-        mapOutputStream.flush();
+            ObjectOutputStream mapOutputStream = new ObjectOutputStream(fileOutputStream);
 
-        mapOutputStream.close();
-        fileOutputStream.close();
+            mapOutputStream.writeObject(hashMapRoom);
+            mapOutputStream.flush();
+
+            mapOutputStream.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            System.out.println("Impossible to read the file: " + PATH);
+        }
+
     }
-
 }

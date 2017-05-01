@@ -1,7 +1,7 @@
-package Controller;
+package com.project.Controller;
 
-import DAO.DAO_Hotels_Impl_TXT;
-import Entity.Hotel;
+import com.project.DAO.DAO_Hotels_Impl_TXT;
+import com.project.Entity.Hotel;
 
 import java.util.HashMap;
 import java.util.List;

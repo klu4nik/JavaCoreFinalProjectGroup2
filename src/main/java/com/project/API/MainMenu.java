@@ -67,7 +67,7 @@ public class MainMenu {
     private void cls() {
         for (int i = 1; i <= 300; i++) {
             System.out.println();
-        }//
+        }
     }
 
 }

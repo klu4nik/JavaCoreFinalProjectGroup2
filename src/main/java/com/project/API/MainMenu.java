@@ -1,4 +1,4 @@
-package com.project.API;
+package API;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

@@ -1,8 +1,8 @@
-package com.project.API;
+package API;
 
-import com.project.Entity.User;
-import com.project.Util.PasswordHashGenerator;
-import com.project.Controller.UserController;
+import Entity.User;
+import Util.PasswordHashGenerator;
+import Controller.UserController;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

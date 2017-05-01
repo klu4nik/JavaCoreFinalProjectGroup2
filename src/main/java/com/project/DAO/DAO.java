@@ -1,4 +1,4 @@
-package com.project.DAO;
+package DAO;
 
 
 import java.io.FileNotFoundException;

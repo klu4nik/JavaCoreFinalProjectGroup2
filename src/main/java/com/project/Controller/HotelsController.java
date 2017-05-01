@@ -1,13 +1,8 @@
-package com.project.Controller;
+package Controller;
 
-<<<<<<< HEAD:JavaCoreFinalProjectGroup2/src/main/java/com/project/Controller/HotelsController.java
-import com.project.DAO.DAO_Hotels_Impl_TXT;
-import com.project.Entity.Hotel;
-=======
 import DAO.DAO_Hotels_Impl_TXT;
 import DAO.DAO_Rooms_Impl_TXT;
 import Entity.Hotel;
->>>>>>> origin/develop:src/main/java/com/project/Controller/HotelsController.java
 
 import java.util.HashMap;
 import java.util.List;

@@ -51,35 +51,11 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
             Integer numberOfPerson = Integer.valueOf(stringTokenizer.nextToken());
             Integer price = Integer.valueOf(stringTokenizer.nextToken());
 
-            if (stringTokenizer.hasMoreTokens()) {
-                String userLogin = stringTokenizer.nextToken();
-                Long bookingStartData = Long.valueOf(stringTokenizer.nextToken());
-                Long bookingEndData = Long.valueOf(stringTokenizer.nextToken());
-
-                User userForRoom = new User(usersFromFile.get(userLogin).getFirsName(), usersFromFile.get(userLogin).getLastName(),
-                        usersFromFile.get(userLogin).getLogin(), usersFromFile.get(userLogin).getPassword());
-
-                Room nextRoom = new Room(
-                        new Hotel(hotelsFromFile.get(hotelid).getHotelName(), hotelsFromFile.get(hotelid).getCity()),
-                        roomid, numberOfPerson, price
-                        ,
-                        userForRoom,
-                        new Date(bookingStartData),
-                        new Date(bookingEndData)
-                );
-                result.put(nextRoom.hashCode(), nextRoom);
-
-
-            } else {
-                Room nextRoom = new Room(
-                        new Hotel(hotelsFromFile.get(hotelid).getHotelName(), hotelsFromFile.get(hotelid).getCity()),
-                        roomid, numberOfPerson, price);
-
-                result.put(nextRoom.hashCode(), nextRoom);
-            }
+            Room nextRoom = new Room(
+                    new Hotel(hotelsFromFile.get(hotelid).getHotelName(), hotelsFromFile.get(hotelid).getCity()),
+                    roomid, numberOfPerson, price);
+            result.put(nextRoom.hashCode(), nextRoom);
         }
-
-
         return result;
     }
 
@@ -95,11 +71,6 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
                                 currentEntery.getValue().getNumberOfperson().toString() + SEPARATOR +
                                 currentEntery.getValue().getPrice().toString());
 
-                if (currentEntery.getValue().getReservedForUser() != null) {
-                    writer.write(SEPARATOR + currentEntery.getValue().getReservedForUser().getLogin() + SEPARATOR +
-                            currentEntery.getValue().getDateOfBookingStart().getTime() + SEPARATOR +
-                            currentEntery.getValue().getDateOfBookingFinish().getTime());
-                }
                 writer.write(new StringBuilder().append((char) 13).append((char) 10).toString()); // Конец строки
 
             }

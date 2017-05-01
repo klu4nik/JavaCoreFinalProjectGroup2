@@ -1,7 +1,13 @@
 package com.project.Controller;
 
+<<<<<<< HEAD:JavaCoreFinalProjectGroup2/src/main/java/com/project/Controller/HotelsController.java
 import com.project.DAO.DAO_Hotels_Impl_TXT;
 import com.project.Entity.Hotel;
+=======
+import DAO.DAO_Hotels_Impl_TXT;
+import DAO.DAO_Rooms_Impl_TXT;
+import Entity.Hotel;
+>>>>>>> origin/develop:src/main/java/com/project/Controller/HotelsController.java
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +20,7 @@ import java.util.stream.Collectors;
 public class HotelsController {
     private HashMap<Integer, Hotel> hotels;
     private DAO_Hotels_Impl_TXT dhi = new DAO_Hotels_Impl_TXT();
+    private DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
 
     public HotelsController() {
         try {
@@ -45,6 +52,9 @@ public class HotelsController {
 
     public HashMap<Integer, Hotel> deleteHotel(Hotel hotel) {
         hotels.remove(hotel.getId());
+        RoomsController roomsController = new RoomsController();
+        roomsController.deleteRoomByHotel(hotel);
+        roomsController.flush();
         return hotels;
     }
 

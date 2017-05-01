@@ -1,9 +1,9 @@
-package DAO;
+package com.project.DAO;
 
-import DAO.DAO;
-import Entity.Hotel;
-import Entity.Room;
-import Entity.User;
+import com.project.DAO.DAO;
+import com.project.Entity.Hotel;
+import com.project.Entity.Room;
+import com.project.Entity.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
  * Created by MYKOLA.GOROKHOV on 23.04.2017.
  */
 public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
-    final static String PATH = "../Rooms";
+    final static String PATH = "../DB/Rooms";
     final static char SEPARATOR = (char) 29;
 
     @Override

@@ -1,7 +1,7 @@
-package Controller;
+package com.project.Controller;
 
-import DAO.*;
-import Entity.User;
+import com.project.DAO.*;
+import com.project.Entity.User;
 
 import java.util.HashMap;
 

@@ -1,7 +1,7 @@
-package com.project.DAO;
+package DAO;
 
-import com.project.DAO.DAO;
-import com.project.Entity.Hotel;
+import DAO.DAO;
+import Entity.Hotel;
 
 import java.io.File;
 import java.io.FileWriter;

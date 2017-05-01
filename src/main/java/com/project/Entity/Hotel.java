@@ -1,5 +1,4 @@
-
-package com.project.Entity;
+package Entity;
 
 import java.io.Serializable;
 

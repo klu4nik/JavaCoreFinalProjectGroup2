@@ -1,6 +1,6 @@
-package com.project.DAO;
+package DAO;
 
-import com.project.Entity.Hotel;
+import Entity.Hotel;
 
 import java.io.*;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Created by MYKOLA.GOROKHOV on 23.04.2017.
  */
 public class DAO_Hotels_Impl implements DAO<HashMap<Integer, Hotel>> {
-    final static String PATH = "../Hotels";
+    final static String PATH = "../JavaCoreFinalProjectGroup2/ext/DB/Hotels";
 
     @Override
     public HashMap<Integer, Hotel> get() throws IOException, ClassNotFoundException {

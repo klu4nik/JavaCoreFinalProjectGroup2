@@ -1,6 +1,4 @@
-package com.project.Entity;
-
-import com.project.Entity.Hotel;
+package Entity;
 
 import java.io.Serializable;
 import java.util.Date;

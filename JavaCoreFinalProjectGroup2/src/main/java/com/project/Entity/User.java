@@ -1,4 +1,4 @@
-package Entity;
+package com.project.Entity;
 
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;

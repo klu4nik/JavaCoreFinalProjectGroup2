@@ -1,6 +1,6 @@
-package DAO;
+package com.project.DAO;
 
-import Entity.User;
+import com.project.Entity.User;
 
 import java.io.*;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Created by MYKOLA.GOROKHOV on 22.04.2017.
  */
 public class DAO_Users_Impl implements DAO<HashMap<String, User>> {
-    final static String PATH = "../JavaCoreFinalProjectGroup2/ext/DB/Users";
+    final static String PATH = "../Users";
 
     @Override
     public HashMap<String, User> get() throws IOException, ClassNotFoundException {

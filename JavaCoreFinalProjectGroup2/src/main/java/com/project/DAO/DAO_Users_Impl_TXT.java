@@ -1,7 +1,7 @@
-package DAO;
+package com.project.DAO;
 
-import DAO.DAO;
-import Entity.User;
+import com.project.DAO.DAO;
+import com.project.Entity.User;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +15,7 @@ import java.util.StringTokenizer;
  * Created by MYKOLA.GOROKHOV on 22.04.2017.
  */
 public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
-    final static String PATH = "../Users";
+    final static String PATH = "../DB/Users";
     final static char SEPARATOR = (char) 29;
 
     @Override

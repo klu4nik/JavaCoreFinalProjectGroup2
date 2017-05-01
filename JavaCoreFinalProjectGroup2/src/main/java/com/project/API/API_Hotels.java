@@ -1,7 +1,7 @@
-package API;
+package com.project.API;
 
-import Controller.HotelsController;
-import Entity.Hotel;
+import com.project.Controller.HotelsController;
+import com.project.Entity.Hotel;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

@@ -1,9 +1,10 @@
 package DAO;
 
+import Entity.Booking;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
+
 
 /**
  * Created by MYKOLA.GOROKHOV on 26.04.2017.
@@ -11,6 +12,6 @@ import java.util.HashMap;
 public interface DAO <T>{
     public T get() throws IOException, ClassNotFoundException;
 
-    public void set(T hashMapHotels) throws IOException;
+    public void set(T t) throws IOException;
 
 }

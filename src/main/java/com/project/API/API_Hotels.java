@@ -27,34 +27,44 @@ public class API_Hotels {
             //-----------------
             Scanner scanner = new Scanner(System.in);
             choice = String.valueOf(scanner.next().toLowerCase().charAt(0));
+            scanner.nextLine();
             //-----------------
             switch (choice) {
                 case ITEM_1:
                     cls();
                     AddHotelMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_2:
                     cls();
                     editHotelMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_3:
                     cls();
                     DeleteHotelMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_4:
                     cls();
                     findHotelByName();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_5:
                     cls();
                     findHotelByCity();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");
                     hotelsController.flush();
                     break;
                 default:
-                    System.out.println("Wrong Choice");
                     break;
             }
 
@@ -100,7 +110,6 @@ public class API_Hotels {
 
             hotelsController.updateHotel(new Hotel(oldHotelName, oldHotelCity),
                     new Hotel(newHotelName, newHotelCity));
-
         } else {
             if (!oldHotelCity.equals("")) {
                 System.out.println("\n\nТакого отеля нет в БД . . .");
@@ -123,8 +132,6 @@ public class API_Hotels {
         if (!hotelCity.equals("")) {
             System.out.println("Найденые отели: ");
             System.out.println(hotelsController.findHotelByCity(hotelCity));
-            System.out.println("Для продолжения нажмите Enter");
-            scanner.nextLine();
         }
     }
 
@@ -142,8 +149,6 @@ public class API_Hotels {
         if (!hotelName.equals("")) {
             System.out.println("Найденые отели: ");
             System.out.println(hotelsController.findHotelByName(hotelName));
-            System.out.println("Для продолжения нажмите Enter");
-            scanner.nextLine();
         }
     }
 
@@ -173,7 +178,6 @@ public class API_Hotels {
             }
         }
     }
-
 
     private void AddHotelMenu() {
         System.out.println("+-----------------------------------------+");
@@ -217,7 +221,9 @@ public class API_Hotels {
         System.out.println("+-----------------------------------------+");
     }
 
+    // Можно вынести в отдельную утилиту???
     private void cls() {
+//        System.out.println("*********************************");
         for (int i = 1; i <= 300; i++) {
             System.out.println();
         }

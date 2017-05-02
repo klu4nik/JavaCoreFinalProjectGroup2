@@ -29,10 +29,10 @@ public class MainMenu {
                     new API_Users().run();
                     break;
                 case ITEM_2:
-                  new API_Hotels().run();
+                    new API_Hotels().run();
                     break;
                 case ITEM_3:
-                 new API_Rooms().run();
+                    new API_Rooms().run();
                     break;
                 case ITEM_4:
 //                   new API_Booking().run();
@@ -42,7 +42,6 @@ public class MainMenu {
 
                     break;
                 default:
-                    System.out.println("Wrong Choice");
                     break;
             }
 
@@ -64,7 +63,9 @@ public class MainMenu {
         System.out.println("+-----------------------------------------+");
     }
 
+    // Можно вынести в отдельную утилиту???
     private void cls() {
+//        System.out.println("*********************************");
         for (int i = 1; i <= 300; i++) {
             System.out.println();
         }

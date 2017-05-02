@@ -30,39 +30,47 @@ public class API_Rooms {
             //-----------------
             Scanner scanner = new Scanner(System.in);
             choice = String.valueOf(scanner.next().toLowerCase().charAt(0));
+            scanner.nextLine();
             //-----------------
             switch (choice) {
                 case ITEM_1:
                     cls();
                     addRoomHederDraw();
                     addRoomMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_2:
                     cls();
                     editRoomHederDraw();
                     editRoomMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_3:
                     cls();
                     deleteRoomByHotelHederDraw();
                     DeleteRoomMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_4:
                     cls();
                     findRoomByHotelHederDraw();
                     findRoomByHotel();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");
                     roomsController.flush();
                     break;
                 default:
-                    System.out.println("Wrong Choice");
                     break;
             }
-
         } while (!choice.equals(EXIT));
     }
+
     private void editRoomHederDraw() {
         System.out.println("+-----------------------------------------+");
         System.out.println("|             EDIT ROOM MENU              |");
@@ -71,60 +79,56 @@ public class API_Rooms {
 
     private void editRoomMenu() {
         findRoomByHotel();
-        Integer roomNumberInteger = -1;
-//        Integer oldNumberOfPersonInteger;
-//        Integer oldPriceInteger;
 
-        Integer newNumberOfPersonInteger;
-        Integer newPriceInteger;
+        if (hotelForRoom != null && roomsController.findRoomByHotel(hotelForRoom).size() != 0) {
+            Integer roomNumberInteger = -1;
+            Integer newNumberOfPersonInteger;
+            Integer newPriceInteger;
 
+            System.out.println("Введите номер комнаты, которую надо редактировать :");
+            Scanner scanner = new Scanner(System.in);
+            String roomNumber = scanner.nextLine();
+            if (!roomNumber.equals("")) {
+                try {
+                    roomNumberInteger = Integer.parseInt(roomNumber);
+                } catch (NumberFormatException e) {
+                    System.out.println("Недопустимое значение...");
+                }
+                if (roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)) {
+                    System.out.println("Номер комнаты : " + roomNumber);
+                    System.out.println("Введите колличество мест (Enter оставить старое):");
+                    String newNumberOfPerson = scanner.nextLine();
+                    if (!newNumberOfPerson.equals("")) {
+                        try {
+                            newNumberOfPersonInteger = Integer.parseInt(newNumberOfPerson);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Недопустимое значение...");
+                            newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getNumberOfperson();
+                        }
+                    } else {
+                        newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getNumberOfperson();
+                    }
+                    System.out.println("Колличество мест : " + newNumberOfPersonInteger);
 
-        System.out.println("Введите номер комнаты, которую надо редактировать :");
-        Scanner scanner = new Scanner(System.in);
-        String RoomNumber = scanner.nextLine();
-        try {
-            roomNumberInteger = Integer.parseInt(RoomNumber);
-        } catch (NumberFormatException e) {
-            System.err.println("Недопустимое значение...");
-        }
-        if (roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)) {
+                    System.out.println("Введите цену (Enter оставить старую):");
+                    String newPrice = scanner.nextLine();
+                    if (!newPrice.equals("")) {
+                        try {
+                            newPriceInteger = Integer.parseInt(newPrice);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Недопустимое значение...");
+                            newPriceInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getPrice();
+                        }
+                    } else {
+                        newPriceInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getPrice();
+                    }
+                    System.out.println("Цена : " + newPriceInteger);
+                }
 
-            System.out.println("Введите колличество мест (Enter оставить старое):");
-            String newNumberOfPerson = scanner.nextLine();
-
-            try {
-                newNumberOfPersonInteger = Integer.parseInt(newNumberOfPerson);
-            } catch (NumberFormatException e) {
-                System.err.println("Недопустимое значение...");
-               if(newNumberOfPerson.equals("")){
-                   newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom,roomNumberInteger).getNumberOfperson();}
+            } else {
+                System.out.println("Такой комнаты нет");
             }
-
-
-
-
-
-            System.out.println("Введите цену (Enter оставить старую):");
-            String newPrice = scanner.nextLine();
-
-            try {
-                newPriceInteger = Integer.parseInt(newPrice);
-            } catch (NumberFormatException e) {
-                System.err.println("Недопустимое значение...");
-                if(newPrice.equals("")){
-                    newPriceInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom,roomNumberInteger).getPrice();}
-            }
-
-
-
-
-
-        } else {
-            System.out.println("Такой комнаты нет");
         }
-
-
-
     }
 
     private void addRoomHederDraw() {
@@ -135,59 +139,58 @@ public class API_Rooms {
 
     private void addRoomMenu() {
         findRoomByHotel();
+        if (hotelForRoom != null) {
+            Integer roomNumberInteger;
+            Integer numberOfPersonInteger;
+            Integer priceInteger;
 
-        Integer roomNumberInteger;
-        Integer numberOfPersonInteger;
-        Integer priceInteger;
+            System.out.println("Введите номер комнаты, которую надо добавить :");
+            Scanner scanner = new Scanner(System.in);
+            String roomNumber = scanner.nextLine();
+            try {
+                roomNumberInteger = Integer.parseInt(roomNumber);
+            } catch (NumberFormatException e) {
+                System.out.println("Недопустимое значение...");
+                roomNumberInteger = -1;
+            }
 
-        System.out.println("Введите номер комнаты, которую надо добавить :");
-        Scanner scanner = new Scanner(System.in);
-        String roomNumber = scanner.nextLine();
-        try {
-            roomNumberInteger = Integer.parseInt(roomNumber);
-        } catch (NumberFormatException e) {
-            System.err.println("Недопустимое значение...");
-            roomNumberInteger = -1;
-        }
+            if (roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)) {
+                System.out.println("Такая комната уже есть");
+            } else {
 
-        if (roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)) {
-            System.out.println("Такая комната уже есть");
-        } else {
+                if (roomNumberInteger != -1 && !roomNumber.equals("")) {
 
-            if (roomNumberInteger != -1 && !roomNumber.equals("")) {
-
-                System.out.println("Введите колличество мест :");
-                String numberOfPerson = scanner.nextLine();
-
-                try {
-                    numberOfPersonInteger = Integer.parseInt(numberOfPerson);
-                } catch (NumberFormatException e) {
-                    System.err.println("Недопустимое значение...");
-                    numberOfPersonInteger = -1;
-                }
-
-                if (numberOfPersonInteger > 0 && !numberOfPerson.equals("")) {
-
-                    System.out.println("Введите цену :");
-                    String price = scanner.nextLine();
+                    System.out.println("Введите колличество мест :");
+                    String numberOfPerson = scanner.nextLine();
 
                     try {
-                        priceInteger = Integer.parseInt(price);
+                        numberOfPersonInteger = Integer.parseInt(numberOfPerson);
                     } catch (NumberFormatException e) {
-                        System.err.println("Недопустимое значение...");
-                        priceInteger = -1;
+                        System.out.println("Недопустимое значение...");
+                        numberOfPersonInteger = -1;
                     }
-                    if (priceInteger >= 0 && !price.equals("")) {
 
-                    }
-                    if (!roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger) &&
-                            !numberOfPersonInteger.equals(-1) &&
-                            priceInteger.equals(-1)
-                            ) {
-                        System.out.println("комната добавлена");
-                        roomsController.addRoom(new Room(hotelForRoom, roomNumberInteger, numberOfPersonInteger, priceInteger));
-                    } else {
-                        System.out.println("Такая комната уже есть");
+                    if (numberOfPersonInteger > 0 && !numberOfPerson.equals("")) {
+
+                        System.out.println("Введите цену :");
+                        String price = scanner.nextLine();
+
+                        try {
+                            priceInteger = Integer.parseInt(price);
+                        } catch (NumberFormatException e) {
+                            System.out.println("Недопустимое значение...");
+                            priceInteger = -1;
+                        }
+
+                        if (!roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)
+                                && numberOfPersonInteger > 0
+                                && priceInteger >= 0
+                                ) {
+                            System.out.println("комната добавлена");
+                            roomsController.addRoom(new Room(hotelForRoom, roomNumberInteger, numberOfPersonInteger, priceInteger));
+                        } else {
+                            System.out.println("Такая комната уже есть");
+                        }
                     }
                 }
             }
@@ -208,7 +211,6 @@ public class API_Rooms {
         Scanner scanner = new Scanner(System.in);
         String roomNumber = scanner.nextLine();
 
-
         if (!roomNumber.equals("")) {
             Integer roomNumberInteger = 0;
             try {
@@ -219,15 +221,12 @@ public class API_Rooms {
 
             if (roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)) {
                 roomsController.deleteRoomByHotelAndNumber(hotelForRoom, roomNumberInteger);
+                System.out.println("Комната добавлена");
             } else {
                 System.out.println("Такой комнаты нет");
             }
         }
-        System.out.println("Для продолжения нажмите Enter");
-        scanner.nextLine();
-
     }
-
 
     private void findRoomByHotelHederDraw() {
         System.out.println("+-----------------------------------------+");
@@ -239,10 +238,9 @@ public class API_Rooms {
         System.out.println("Введите название отеля: ");
 
         Scanner scanner = new Scanner(System.in);
-        String hotelCity = null;
+        String hotelCity;
         hotelForRoom = null;
         String hotelName = scanner.nextLine();
-
 
         if (!hotelName.equals("")) {
 
@@ -251,7 +249,9 @@ public class API_Rooms {
                 if (hotelsController.findHotelByName(hotelName).size() == 1) {
                     hotelCity = hotelsController.findHotelByName(hotelName).get(0).getCity();
                 } else {
-                    System.out.println("В каком городе отель?");
+                    System.out.println("Есть такие варианты : ");
+                    System.out.println(hotelsController.findHotelByName(hotelName));
+                    System.out.println("\nВ каком городе отель?");
                     hotelCity = scanner.nextLine();
                 }
 
@@ -263,14 +263,8 @@ public class API_Rooms {
                     System.out.println("Найденые комнаты:");
                     System.out.println(roomsController.findRoomByHotel(hotelForRoom));
                 }
-            } else {
-                System.out.println("нет такого отеля");
             }
-
         }
-        System.out.println("Для продолжения нажмите Enter");
-        scanner.nextLine();
-
     }
 
     private void drawMainMenu() {
@@ -287,7 +281,9 @@ public class API_Rooms {
         System.out.println("+-----------------------------------------+");
     }
 
+    // Можно вынести в отдельную утилиту???
     private void cls() {
+//        System.out.println("*********************************");
         for (int i = 1; i <= 300; i++) {
             System.out.println();
         }

@@ -26,42 +26,46 @@ public class API_Users {
             //-----------------
             Scanner scanner = new Scanner(System.in);
             choice = String.valueOf(scanner.next().toLowerCase().charAt(0));
+            scanner.nextLine();//Дочитываем мусор
             //-----------------
-
 
             switch (choice) {
                 case ITEM_1:
+                    cls();
                     AddUserMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_2:
+                    cls();
                     editUserMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_3:
+                    cls();
                     deleteUserMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");
                     userController.flush();
                     break;
                 default:
-                    System.out.println("Wrong Choice");
                     break;
             }
 
         } while (!choice.equals(EXIT));
-
-
     }
 
     private void deleteUserMenu() throws NoSuchAlgorithmException {
-        cls();
         System.out.println("+-----------------------------------------+");
         System.out.println("|          DELETE USER MENU               |");
         System.out.println("+-----------------------------------------+");
         System.out.println();
         System.out.println("Введите Login, удаляемого  пользователя: ");
 
-        //-----------------
         Scanner scanner = new Scanner(System.in);
         String login = scanner.nextLine();
 
@@ -77,11 +81,9 @@ public class API_Users {
             System.out.println("Пользователь удаляется . . . ");
             userController.deleteUserByLogin(login);
         }
-
     }
 
     private void editUserMenu() throws NoSuchAlgorithmException {
-        cls();
         System.out.println("+-----------------------------------------+");
         System.out.println("|            EDIT USER MENU               |");
         System.out.println("+-----------------------------------------+");
@@ -127,14 +129,12 @@ public class API_Users {
     }
 
     private void AddUserMenu() throws NoSuchAlgorithmException {
-        cls();
         System.out.println("+-----------------------------------------+");
         System.out.println("|             ADD USER MENU               |");
         System.out.println("+-----------------------------------------+");
         System.out.println();
         System.out.println("Введите Login, для нового пользователя: ");
 
-        //-----------------
         Scanner scanner = new Scanner(System.in);
         String login = scanner.nextLine();
         while (userController.findUserByLogin(login) != null && !login.equals("")) {
@@ -142,8 +142,8 @@ public class API_Users {
             System.out.println("Попробуйте еще раз.\n");
             System.out.println("Введите Login, для нового пользователя: ");
             login = scanner.nextLine();
-
         }
+
         if (!login.equals("")) {
             System.out.println("Login: " + login);
 
@@ -163,9 +163,7 @@ public class API_Users {
             System.out.println("Пользователь добавляется . . . ");
             userController.addUser(new User(firstName, lastName, login, PasswordHashGenerator.generate(password)));
         }
-
     }
-
 
     private void drawMainMenu() {
         cls();
@@ -180,7 +178,9 @@ public class API_Users {
         System.out.println("+-----------------------------------------+");
     }
 
+    // Можно вынести в отдельную утилиту???
     private void cls() {
+//        System.out.println("*********************************");
         for (int i = 1; i <= 300; i++) {
             System.out.println();
         }

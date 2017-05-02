@@ -8,7 +8,6 @@ import Util.PasswordHashGenerator;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -17,25 +16,9 @@ import java.util.HashMap;
 public class TestMain {
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, ClassNotFoundException {
-//        то что дальше создает файлы (надо будет убрать)
-//
+//        создает файлы (надо будет убрать)
 //        TestMain.fileGenerator();
-//
-//
-//
-//        DAO_Users_Impl_TXT dui_TXT = new DAO_Users_Impl_TXT();
-//        DAO_Hotels_Impl_TXT dhi_TXT = new DAO_Hotels_Impl_TXT();
-//        DAO_Rooms_Impl_TXT dri_TXT = new DAO_Rooms_Impl_TXT();
-//
-//        DAO_Users_Impl dui = new DAO_Users_Impl();
-//        DAO_Hotels_Impl dhi = new DAO_Hotels_Impl();
-//        DAO_Rooms_Impl dri = new DAO_Rooms_Impl();
-//
-//
-//        dui_TXT.set(dui.get());
-//        dhi_TXT.set(dhi.get());
-//        dri_TXT.set(dri.get());
-//
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -44,17 +27,14 @@ public class TestMain {
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
 
-    public static void fileGenerator() throws NoSuchAlgorithmException, IOException {
+    public static void fileGenerator() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         // -------------USER-----------------------
         DAO_Users_Impl dui = new DAO_Users_Impl();
         HashMap hm = new HashMap<String, User>();
-        User userforRoom = null;
         for (int i = 1; i <= 100; i++) {
             User newUser = new User("First Name" + i, "Last Name" + i, "Login" + i, PasswordHashGenerator.generate(("pass" + i)));
             hm.put(newUser.getLogin(), newUser);
-            userforRoom = newUser;
         }
-
         dui.set(hm);
 // ------------END-USER-----------------------
 // ------------HOTEL-ROOM-----------------------
@@ -75,7 +55,13 @@ public class TestMain {
 
         dri.set(roo);
         dhi.set(hot);
+        DAO_Users_Impl_TXT dui_TXT = new DAO_Users_Impl_TXT();
+        DAO_Hotels_Impl_TXT dhi_TXT = new DAO_Hotels_Impl_TXT();
+        DAO_Rooms_Impl_TXT dri_TXT = new DAO_Rooms_Impl_TXT();
 
+        dui_TXT.set(dui.get());
+        dhi_TXT.set(dhi.get());
+        dri_TXT.set(dri.get());
     }
 }
 

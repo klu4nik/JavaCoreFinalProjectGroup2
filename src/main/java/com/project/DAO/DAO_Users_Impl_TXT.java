@@ -26,7 +26,7 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
         currentUsers = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
 //        Описываем вид результата
         HashMap<String, User> result = new HashMap<String, User>();
-//        бъем каждую cторку на поля
+//        бъем каждую cтроку на поля
         for (String str : currentUsers) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
             Integer id = Integer.parseInt(stringTokenizer.nextToken());
@@ -34,7 +34,7 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
             String firsName = stringTokenizer.nextToken();
             String lastName = stringTokenizer.nextToken();
             String password = stringTokenizer.nextToken();
-            result.put(login, new User(firsName, lastName, login, password));
+            result.put(login, new User(id, firsName, lastName, login, password));
         }
         return result;
     }
@@ -49,7 +49,7 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
                 writer.write(
                         currentEntery.getValue().getId() + SEPARATOR +
                                 currentEntery.getValue().getLogin() + SEPARATOR +
-                                currentEntery.getValue().getFirsName() + SEPARATOR +
+                                currentEntery.getValue().getFirstName() + SEPARATOR +
                                 currentEntery.getValue().getLastName() + SEPARATOR +
                                 currentEntery.getValue().getPassword()
                                 + (char) 13 + (char) 10 // Конец строки

@@ -7,24 +7,32 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     private Integer id;
-    private String firsName;
+    private String firstName;
     private String lastName;
     private String login;
     private String password;
 
-    public User(String firsName, String lastName, String login, String password) {
-        this.firsName = firsName;
+    public User(String firstName, String lastName, String login, String password) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.id = this.hashCode();
     }
 
+    public User(Integer id, String firstName, String lastName, String login, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.id = id;
+    }
+
     public Integer getId() { return id; }
 
 
-    public String getFirsName() {
-        return firsName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
@@ -43,7 +51,7 @@ public class User implements Serializable {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firsName='" + firsName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
@@ -58,7 +66,7 @@ public class User implements Serializable {
         User user = (User) o;
 
         if (!id.equals(user.id)) return false;
-        if (!firsName.equals(user.firsName)) return false;
+        if (!firstName.equals(user.firstName)) return false;
         if (!lastName.equals(user.lastName)) return false;
         if (!login.equals(user.login)) return false;
         return password.equals(user.password);
@@ -67,7 +75,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = firsName.hashCode();
+        int result = firstName.hashCode();
         result = 31 * result + lastName.hashCode();
         result = 31 * result + login.hashCode();
         result = 31 * result + password.hashCode();

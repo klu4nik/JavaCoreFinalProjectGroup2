@@ -114,7 +114,7 @@ public class API_Users {
             System.out.println("Введите Новое Имя (Enter оставить старую): ");
             String firstName = scanner.nextLine();
             if (firstName.equals("")) {
-                firstName = oldUser.getFirsName();
+                firstName = oldUser.getFirstName();
             }
             System.out.println("Новое Имя :" + firstName);
             System.out.println();

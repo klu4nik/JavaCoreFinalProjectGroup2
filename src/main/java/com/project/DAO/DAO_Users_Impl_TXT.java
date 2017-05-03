@@ -1,9 +1,10 @@
 package DAO;
 
-import DAO.DAO;
 import Entity.User;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,6 +29,7 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
 //        бъем каждую cторку на поля
         for (String str : currentUsers) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
+            Integer id = Integer.parseInt(stringTokenizer.nextToken());
             String login = stringTokenizer.nextToken();
             String firsName = stringTokenizer.nextToken();
             String lastName = stringTokenizer.nextToken();
@@ -45,7 +47,8 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
         try (FileWriter writer = new FileWriter(usersFile)) {
             for (HashMap.Entry<String, User> currentEntery : hashMapUsers.entrySet()) {
                 writer.write(
-                        currentEntery.getValue().getLogin() + SEPARATOR +
+                        currentEntery.getValue().getId() + SEPARATOR +
+                                currentEntery.getValue().getLogin() + SEPARATOR +
                                 currentEntery.getValue().getFirsName() + SEPARATOR +
                                 currentEntery.getValue().getLastName() + SEPARATOR +
                                 currentEntery.getValue().getPassword()

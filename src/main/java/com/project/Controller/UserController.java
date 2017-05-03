@@ -22,6 +22,10 @@ public class UserController {
         }
     }
 
+    public User findUserById(Integer id){
+        return users.get(id);
+    }
+
 
     public User findUserByLogin(String login) {
 

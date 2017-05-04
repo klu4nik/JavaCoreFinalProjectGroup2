@@ -16,7 +16,7 @@ public class TestMain {
 
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, ClassNotFoundException {
 //        создает файлы (надо будет убрать)
-//       TestMain.fileGenerator();
+       TestMain.fileGenerator();
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

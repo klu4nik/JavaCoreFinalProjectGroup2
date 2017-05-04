@@ -4,6 +4,8 @@ import DAO.DAO_Booking_Impl_TXT;
 import DAO.DAO_Rooms_Impl_TXT;
 import Entity.Booking;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,7 +46,7 @@ public class BookingController {
         return 0;
     }
 
-    public HashMap<Integer, Booking> deleteBooking (Booking book) {
+    public HashMap<Integer, Booking> deleteBooking(Booking book) {
         booking.remove(book.getId());
         flush();
         return booking;
@@ -67,5 +69,15 @@ public class BookingController {
         deleteBooking(oldBooking);
         addBook(newBooking);
         return booking;
+    }
+
+    public Date convertStringToDate(String stringDate) {
+        SimpleDateFormat simpleFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            return simpleFormat2.parse(stringDate);
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 }

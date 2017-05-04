@@ -65,9 +65,18 @@ public class HotelsController {
         return hotelNames;
     }
 
+    public List<Hotel> findHotelById(Integer hotel_id) {
+        List<Hotel> hotel =
+                hotels.values().stream().filter(p -> p.getId().equals(hotel_id)).collect(Collectors.toList());
+        return hotel;
+
+    }
+
     public HashMap<Integer, Hotel> updateHotel(Hotel oldHotel, Hotel newHotel) {
         deleteHotel(oldHotel);
         addHotel(newHotel);
         return hotels;
     }
+
+
 }

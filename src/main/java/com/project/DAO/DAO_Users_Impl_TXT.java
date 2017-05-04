@@ -47,7 +47,7 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
         try (FileWriter writer = new FileWriter(usersFile)) {
             for (HashMap.Entry<String, User> currentEntery : hashMapUsers.entrySet()) {
                 writer.write(
-                        currentEntery.getValue().getId() + SEPARATOR +
+                        currentEntery.getValue().getId().toString() + SEPARATOR +
                                 currentEntery.getValue().getLogin() + SEPARATOR +
                                 currentEntery.getValue().getFirstName() + SEPARATOR +
                                 currentEntery.getValue().getLastName() + SEPARATOR +

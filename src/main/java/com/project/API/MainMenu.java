@@ -35,7 +35,7 @@ public class MainMenu {
                     new API_Rooms().run();
                     break;
                 case ITEM_4:
-//                   new API_Booking().run();
+                   new API_Bookings().run();
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");

@@ -28,8 +28,11 @@ public class UserController {
     }
 
     public User findUserByLogin(String login) {
-
-        return users.get(login);
+        try {
+            return users.get(login);
+        } catch (Exception e){
+            return null;
+        }
     }
 
     public HashMap<String, User> addUser(User user) {

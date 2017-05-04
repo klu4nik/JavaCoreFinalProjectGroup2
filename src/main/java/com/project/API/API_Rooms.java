@@ -17,6 +17,7 @@ public class API_Rooms {
     private final static String ITEM_2 = "2";
     private final static String ITEM_3 = "3";
     private final static String ITEM_4 = "4";
+    private final static String ITEM_5 = "5";
     private final static String EXIT = "q";
 
     private RoomsController roomsController = new RoomsController();

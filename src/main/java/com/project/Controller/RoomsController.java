@@ -6,7 +6,6 @@ import Entity.Room;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -33,9 +32,14 @@ public class RoomsController {
     }
 
     public List<Room> findRoomByHotel(Hotel hotelForRoom) {
-        List<Room> result =
-                rooms.values().stream().filter(p -> p.getHotel().equals(hotelForRoom)).collect(Collectors.toList());
-        return result;
+        try {
+            List<Room> result =
+                    rooms.values().stream().filter(p -> p.getHotel().equals(hotelForRoom)).collect(Collectors.toList());
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public HashMap<Integer, Room> deleteRoomByHotel(Hotel hotel) {

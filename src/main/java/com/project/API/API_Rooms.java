@@ -20,7 +20,6 @@ public class API_Rooms {
     private final static String EXIT = "q";
 
     private RoomsController roomsController = new RoomsController();
-    private HotelsController hotelsController = new HotelsController();
     private Hotel hotelForRoom = null;
 
     public void run() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
@@ -244,18 +243,18 @@ public class API_Rooms {
 
         if (!hotelName.equals("")) {
 
-            if (hotelsController.findHotelByName(hotelName).size() > 0) {
+            if (roomsController.findHotelByName(hotelName).size() > 0) {
 
-                if (hotelsController.findHotelByName(hotelName).size() == 1) {
-                    hotelCity = hotelsController.findHotelByName(hotelName).get(0).getCity();
+                if (roomsController.findHotelByName(hotelName).size() == 1) {
+                    hotelCity = roomsController.findHotelByName(hotelName).get(0).getCity();
                 } else {
                     System.out.println("Есть такие варианты : ");
-                    System.out.println(hotelsController.findHotelByName(hotelName));
+                    System.out.println(roomsController.findHotelByName(hotelName));
                     System.out.println("\nВ каком городе отель?");
                     hotelCity = scanner.nextLine();
                 }
 
-                if (hotelsController.findHotel(new Hotel(hotelName, hotelCity)) == 0) {
+                if (roomsController.findHotel(new Hotel(hotelName, hotelCity)) == 0) {
                     System.out.println("нет такого отеля");
                 } else {
 

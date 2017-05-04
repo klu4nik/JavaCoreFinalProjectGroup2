@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Created by MYKOLA.GOROKHOV on 30.04.2017.
  */
-public class RoomsController {
+public class RoomsController extends HotelsController{
     private HashMap<Integer, Room> rooms;
     private DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
 

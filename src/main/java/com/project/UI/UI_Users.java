@@ -1,4 +1,4 @@
-package API;
+package UI;
 
 import Entity.User;
 import Util.PasswordHashGenerator;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 /**
  * Created by MYKOLA.GOROKHOV on 27.04.2017.
  */
-public class API_Users {
+public class UI_Users {
     private final static String ITEM_1 = "1";
     private final static String ITEM_2 = "2";
     private final static String ITEM_3 = "3";

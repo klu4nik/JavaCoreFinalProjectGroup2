@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * Created by MYKOLA.GOROKHOV on 22.04.2017.
  */
 public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
-    final static String PATH = "../Users";
+    final static String PATH = "./ext/DB/Users";
     final static char SEPARATOR = (char) 29;
 
     @Override

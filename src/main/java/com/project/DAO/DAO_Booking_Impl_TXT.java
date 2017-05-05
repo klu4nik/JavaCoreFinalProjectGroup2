@@ -14,7 +14,7 @@ import java.util.*;
  * Created by MYKOLA.GOROKHOV on 02.05.2017.
  */
 public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
-    final static String PATH = "../Booking";
+    final static String PATH = "./ext/DB/Booking";
     final static char SEPARATOR = (char) 29;
 
     @Override

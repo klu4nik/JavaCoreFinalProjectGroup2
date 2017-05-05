@@ -1,4 +1,4 @@
-import API.MainMenu;
+import UI.MainMenu;
 import DAO.*;
 import Entity.Hotel;
 import Entity.Room;
@@ -28,7 +28,7 @@ public class TestMain {
 
     public static void fileGenerator() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         // -------------USER-----------------------
-        DAO_Users_Impl dui = new DAO_Users_Impl();
+        DAO_Users_Impl_TXT dui = new DAO_Users_Impl_TXT();
         HashMap hm = new HashMap<String, User>();
         for (int i = 1; i <= 100; i++) {
             User newUser = new User("First Name" + i, "Last Name" + i, "Login" + i, PasswordHashGenerator.generate(("pass" + i)));
@@ -37,8 +37,8 @@ public class TestMain {
         dui.set(hm);
 // ------------END-USER-----------------------
 // ------------HOTEL-ROOM-----------------------
-        DAO_Hotels_Impl dhi = new DAO_Hotels_Impl();
-        DAO_Rooms_Impl dri = new DAO_Rooms_Impl();
+        DAO_Hotels_Impl_TXT dhi = new DAO_Hotels_Impl_TXT();
+        DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
         HashMap hot = new HashMap<Integer, Hotel>();
         HashMap roo = new HashMap<Integer, Room>();
 

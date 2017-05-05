@@ -34,9 +34,6 @@ public final class PasswordHashGenerator {
         for (int i = 0; i < passHash.length; i++) {
             hexString.append(Integer.toString(0xFF & passHash[i]));
         }
-
         return hexString.toString();
     }
-
-
 }

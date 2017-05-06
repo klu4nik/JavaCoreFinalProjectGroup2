@@ -68,4 +68,8 @@ public class RoomsController {
     public Room getRoomByHotelAndRoomNumber(Hotel hotel, Integer roomNumber) {
         return rooms.values().stream().filter(p -> p.getHotel().equals(hotel) && p.getRoomNumber().equals(roomNumber)).collect(Collectors.toList()).get(0);
     }
+
+    public List<Room> getRoomsByHotelAndNumberOfPersons(Integer hotelID, Integer numberOfPersons) {
+        return rooms.values().stream().filter(p -> p.getHotel().getId().equals(hotelID) && p.getNumberOfperson() > numberOfPersons).collect(Collectors.toList());
+    }
 }

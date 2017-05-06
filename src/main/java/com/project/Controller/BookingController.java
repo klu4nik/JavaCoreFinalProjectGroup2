@@ -65,6 +65,13 @@ public class BookingController {
         return books;
     }
 
+    public List<Booking> findBookingByRoomInHotel(Integer roomNumber, Integer hotelID) {
+
+        List<Booking> books =
+                booking.values().stream().filter(p -> p.getRoom_Number().equals(roomNumber)).filter(p -> p.getHotel_id().equals(hotelID)).collect(Collectors.toList());
+        return books;
+    }
+
     public HashMap<Integer, Booking> updateHotel(Booking oldBooking, Booking newBooking) {
         deleteBooking(oldBooking);
         addBook(newBooking);

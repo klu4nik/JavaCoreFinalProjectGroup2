@@ -1,5 +1,6 @@
 package UI;
 
+import API.API_Impl;
 import Controller.BookingController;
 import Controller.HotelsController;
 import Controller.RoomsController;
@@ -32,6 +33,7 @@ public class UI_Booking {
     HotelsController hotelsController = new HotelsController();
     UserController userController = new UserController();
     RoomsController roomsController = new RoomsController();
+    API_Impl apiImpl = new API_Impl();
     DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
     DAO_Users_Impl_TXT dui = new DAO_Users_Impl_TXT();
     DAO_Hotels_Impl_TXT dhi = new DAO_Hotels_Impl_TXT();
@@ -152,13 +154,14 @@ public class UI_Booking {
                 login = inputLogin();
                 user_id = userController.findUserByLogin(login).getId();
                 hotelID = getHotelIDByName();
+                datesBooking = setStartEndDate();
                 numberOfPersons = getNumberOfPersons();
                 room_Number = chooseRoomNumber(hotelID, numberOfPersons);
-                datesBooking = setStartEndDate();
+
                 Booking newBook = new Booking(user_id, room_Number, hotelID, datesBooking[0], datesBooking[1]);
                 if (bookingController.findBook(newBook).equals(0)) {
-                        System.out.println("Бронирование добавлено");
-                        bookingController.addBook(newBook);
+                    System.out.println("Бронирование добавлено");
+                    bookingController.addBook(newBook);
 
                 } else {
                     System.out.println("\n\nТакой заказ уже есть . . .");
@@ -183,7 +186,6 @@ public class UI_Booking {
         }
 
         //public Booking(Integer user_id, Integer room_Number, Integer hotel_id, Date date_start, Date date_end)
-
 
 
     }
@@ -211,13 +213,24 @@ public class UI_Booking {
         }
     }
 
-    private void drawAskMenu(String message) {
+    private boolean drawAskMenu(String message) {
         cls();
+        Scanner scanner = new Scanner(System.in);
         System.out.println(message);
         System.out.println("|" + ITEM_1 + ". Повторить попытку                     |");
         System.out.println("|" + EXIT + ". В главное меню                        |");
-
+        String choice = String.valueOf(scanner.nextLine().toLowerCase().charAt(0));
+        switch (choice) {
+            case ITEM_1:
+                cls();
+                return true;
+            case EXIT:
+                drawMainMenu();
+                return false;
+        }
+        return false;
     }
+
 
     private String inputLogin() {
         Scanner scanner = new Scanner(System.in);
@@ -226,28 +239,13 @@ public class UI_Booking {
         do {
             System.out.println("Введите логин пользователя: ");
             login = scanner.nextLine();
-            if (!login.equals("") && userController.findUserByLogin(login) != null) {
+            if (apiImpl.checkLoginIsPresented(login) != null) {
                 state = true;
             } else {
                 boolean state1 = true;
                 do {
-                    drawAskMenu("Такого пользователя не существует");
-                    String choice = String.valueOf(scanner.nextLine().toLowerCase().charAt(0));
-                    switch (choice) {
-                        case ITEM_1:
-                            System.out.println(12);
-                            state1 = false;
-                            state = false;
-                            cls();
-                            break;
-                        case EXIT:
-                            state1 = true;
-                            state = true;
-                            drawMainMenu();
-                            break;
-                    }
-
-                } while (state1);
+                    state1 = drawAskMenu("Такого пользователя не существует");
+                } while (!state1);
             }
 
         } while (!state);
@@ -286,7 +284,7 @@ public class UI_Booking {
 
         } while (!state);
 
-        List<Hotel> foundHotels = hotelsController.findHotelByName(hotel);
+        List<Hotel> foundHotels = apiImpl.findHotelByName(hotel);
 
         int numberOFHotelsWithName = foundHotels.size();
         if (numberOFHotelsWithName > 1) {

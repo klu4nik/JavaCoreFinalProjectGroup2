@@ -30,7 +30,7 @@ public class UserController {
     public User findUserByLogin(String login) {
         try {
             return users.get(login);
-        } catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

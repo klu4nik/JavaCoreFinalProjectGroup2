@@ -72,7 +72,9 @@ public class Booking {
         return date_end;
     }
 
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
     public Integer getHotel_id() {
         return hotel_id;

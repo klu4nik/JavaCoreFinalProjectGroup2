@@ -25,7 +25,7 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
     public HashMap<Integer, Room> get() throws IOException {
 
 //        читаем список отелей
-            HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
+        HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
         try {
             hotelsFromFile = new DAO_Hotels_Impl_TXT().get();
         } catch (IOException e) {
@@ -33,7 +33,7 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
         }
 
 //        читаем список Пользователей
-            HashMap<String, User> usersFromFile = new HashMap<String, User>();
+        HashMap<String, User> usersFromFile = new HashMap<String, User>();
         try {
             usersFromFile = new DAO_Users_Impl_TXT().get();
         } catch (IOException e) {

@@ -35,7 +35,7 @@ public class MainMenu {
                     new UI_Rooms().run();
                     break;
                 case ITEM_4:
-                   new UI_Booking().run();
+                    new UI_Booking().run();
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");

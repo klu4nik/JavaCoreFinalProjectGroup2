@@ -28,7 +28,9 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() { return id; }
+    public Integer getId() {
+        return id;
+    }
 
 
     public String getFirstName() {

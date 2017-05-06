@@ -22,7 +22,7 @@ public class Hotel implements Serializable {
                 "id=" + id +
                 ", hotelName='" + hotelName + '\'' +
                 ", city='" + city + '\'' +
-                '}'+"\n";
+                '}' + "\n";
     }
 
     public Integer getId() {

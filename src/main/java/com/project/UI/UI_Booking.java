@@ -136,7 +136,8 @@ public class UI_Booking {
             hotelID = getHotelIDByName();
             datesBooking = setStartEndDate();
             numberOfPersons = getNumberOfPersons();
-            room_Number = chooseRoomNumber(hotelID, numberOfPersons);
+            room_Number =
+                    chooseRoomNumber(apiImpl.findFreeRoomsForDatesForPersonNumber(hotelID, numberOfPersons, datesBooking[0], datesBooking[1]));
 
             Booking newBook = new Booking(user_id, room_Number, hotelID, datesBooking[0], datesBooking[1]);
             if (apiImpl.findBook(newBook).equals(0)) {
@@ -236,24 +237,8 @@ public class UI_Booking {
             if (!hotel.equals("") && apiImpl.findHotelByName(hotel).size() != 0) {
                 state = true;
             } else {
-                boolean state1 = true;
-                do {
-                    drawAskMenu("Такого отеля не существует");
-                    String choice = String.valueOf(scanner.nextLine().toLowerCase().charAt(0));
-                    switch (choice) {
-                        case ITEM_1:
-                            state1 = false;
-                            state = false;
-                            cls();
-                            break;
-                        case EXIT:
-                            state1 = true;
-                            state = true;
-                            drawMainMenu();
-                            break;
-                    }
-
-                } while (state1);
+                state = false;
+                drawAskMenu("Такого отеля не существует");
             }
 
         } while (!state);
@@ -290,12 +275,10 @@ public class UI_Booking {
     }
 
 
-    private Integer chooseRoomNumber(Integer hotelId, Integer numberOfPersons) {
+    private Integer chooseRoomNumber(List<Room> foundRooms) {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
-        String room;
 
-        List<Room> foundRooms = apiImpl.findRoomByHotel(apiImpl.findHotelById(hotelId).get(0));
         System.out.println("Выберите комнату:");
 
         for (int i = 0; i < foundRooms.size(); i++) {
@@ -304,18 +287,21 @@ public class UI_Booking {
         }
         do {
             String choice = String.valueOf(scanner.nextLine().toLowerCase());
-            Integer choiceInt = Integer.parseInt(choice);
-
-            if (Integer.parseInt(choice) <= foundRooms.size() && choiceInt > 0) {
-                state = true;
-                return foundRooms.get(Integer.parseInt(choice)).getRoomNumber();
-            } else System.out.println("Введите корректный номер в списке");
+            try {
+                Integer choiceInt = Integer.parseInt(choice);
+                if (Integer.parseInt(choice) <= foundRooms.size() && choiceInt > 0) {
+                    state = true;
+                    return foundRooms.get(Integer.parseInt(choice)).getRoomNumber();
+                } else System.out.println("Введите корректный номер в списке");
+            } catch (Exception e) {
+                System.out.println("Введите корректное число.");
+            }
         } while (!state);
         return null;
     }
 
     public Integer getNumberOfPersons() {
-        System.out.println("Введите количетво гостей:");
+        System.out.println("Введите количество гостей:");
         Scanner scanner = new Scanner(System.in);
 
         boolean state = false;
@@ -347,19 +333,6 @@ public class UI_Booking {
             if (apiImpl.convertStringToDate(date) == null) {
                 do {
                     drawAskMenu("Дата введена некоректно:");
-                    String choice = String.valueOf(scanner.nextLine().toLowerCase().charAt(0));
-
-                    switch (choice) {
-                        case ITEM_1:
-                            System.out.println(12);
-                            state1 = false;
-                            cls();
-                            break;
-                        case EXIT:
-                            state1 = true;
-                            drawMainMenu();
-                            break;
-                    }
                 } while (!state1);
             } else {
 
@@ -405,8 +378,6 @@ public class UI_Booking {
         endDateBooking = apiImpl.convertStringToDate(date);
         Date[] datesBooking = {startDateBooking, endDateBooking};
         return datesBooking;
-
-
     }
 }
 

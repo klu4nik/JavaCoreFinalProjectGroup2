@@ -22,7 +22,6 @@ public class RoomsController {
             e.getMessage();
         }
     }
-
     public boolean isRoomsDBisEmpty(){
         try {
             return dri.get().isEmpty();
@@ -30,6 +29,8 @@ public class RoomsController {
             return false;
         }
     }
+
+
 
     public void flush() {
         try {

@@ -40,7 +40,7 @@ public class BookingController {
 
     public Integer findBook(Booking book) {
         try {
-            if (!booking.containsValue(book)) {
+            if (booking.containsValue(book)) {
                 System.out.println(book.toString());
                 return book.getId();
             }

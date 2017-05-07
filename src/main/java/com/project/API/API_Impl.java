@@ -26,7 +26,7 @@ public class API_Impl {
 
 
     public boolean isAllDBPresented() {
-        return !hotelsController.isHotelsDBisEmpty() && !userController.isUsersDBisEmpty() && !roomsController.isRoomsDBisEmpty();
+        return !hotelsController.isHotelsDBisEmpty() && !userController.isUsersDBisEmpty() && !roomsController. isRoomsDBisEmpty();
     }
 
     public String checkLoginIsPresented(String login) {

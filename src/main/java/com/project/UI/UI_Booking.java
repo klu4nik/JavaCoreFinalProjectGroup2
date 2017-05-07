@@ -354,19 +354,7 @@ public class UI_Booking {
             if (apiImpl.convertStringToDate(date) == null || apiImpl.convertStringToDate(date).before(startDateBooking)) {
                 do {
                     drawAskMenu("Дата введена некоректно:");
-                    String choice = String.valueOf(scanner.nextLine().toLowerCase().charAt(0));
 
-                    switch (choice) {
-                        case ITEM_1:
-                            System.out.println(12);
-                            state1 = false;
-                            cls();
-                            break;
-                        case EXIT:
-                            state1 = true;
-                            drawMainMenu();
-                            break;
-                    }
                 } while (!state1);
             } else {
 

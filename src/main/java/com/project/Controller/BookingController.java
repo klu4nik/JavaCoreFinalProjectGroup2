@@ -25,7 +25,6 @@ public class BookingController {
     }
 
 
-
     public void flush() {
         try {
             dbi.set(booking);
@@ -35,13 +34,18 @@ public class BookingController {
     }
 
     public HashMap<Integer, Booking> addBook(Booking newBook) {
-        booking.put(newBook.getUser_login(), newBook);
+        booking.put(newBook.getId(), newBook);
         return booking;
     }
 
     public Integer findBook(Booking book) {
-        if (booking.containsValue(book)) {
-            return book.getId();
+        try {
+            if (!booking.containsValue(book)) {
+                System.out.println(book.toString());
+                return book.getId();
+            }
+        } catch (Exception e) {
+            return 1;
         }
         return 0;
     }

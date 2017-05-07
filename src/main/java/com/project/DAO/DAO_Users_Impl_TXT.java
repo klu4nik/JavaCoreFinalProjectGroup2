@@ -31,10 +31,10 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<String, User>> {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
             Integer id = Integer.parseInt(stringTokenizer.nextToken());
             String login = stringTokenizer.nextToken();
-            String firsName = stringTokenizer.nextToken();
+            String firstName = stringTokenizer.nextToken();
             String lastName = stringTokenizer.nextToken();
             String password = stringTokenizer.nextToken();
-            result.put(login, new User(id, firsName, lastName, login, password));
+            result.put(login, new User(id, firstName, lastName, login, password));
         }
         return result;
     }

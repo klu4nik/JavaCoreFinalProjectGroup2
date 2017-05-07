@@ -1,8 +1,6 @@
 package UI;
 
 import API.API_Impl;
-import Controller.HotelsController;
-import Controller.UserController;
 import Entity.Booking;
 import Entity.Hotel;
 import Entity.Room;
@@ -24,14 +22,8 @@ public class UI_Booking {
     private final static String ITEM_5 = "5";
     private final static String EXIT = "q";
 
-//    BookingController bookingController = new BookingController();
-//    HotelsController hotelsController = new HotelsController();
-    UserController userController = new UserController();
-//    RoomsController roomsController = new RoomsController();
     API_Impl apiImpl = new API_Impl();
-//    DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
-//    DAO_Users_Impl_TXT dui = new DAO_Users_Impl_TXT();
-//    DAO_Hotels_Impl_TXT dhi = new DAO_Hotels_Impl_TXT();
+
 
     public void run() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         String choice;
@@ -112,11 +104,11 @@ public class UI_Booking {
         System.out.println("|          DELETE BOOKING MENU            |");
         System.out.println("+-----------------------------------------+\n");
 
-        System.out.println("Введите название, удаляемого отеля: ");
+        System.out.println("Введите логин пользователя: ");
 
         Scanner scanner = new Scanner(System.in);
+        String login = inputLogin();
 
-        String hotelName = scanner.nextLine();
 
     }
 
@@ -211,7 +203,7 @@ public class UI_Booking {
                 return true;
             case EXIT:
                 drawMainMenu();
-                return false;
+                break;
         }
         return false;
     }
@@ -225,14 +217,11 @@ public class UI_Booking {
             System.out.println("Введите логин пользователя: ");
             login = scanner.nextLine();
             if (apiImpl.checkLoginIsPresented(login) != null) {
-                state = drawAskMenu("Такого отеля не существует");
+                state = true;
             } else {
-                boolean state1 = true;
-                do {
-                    state1 = drawAskMenu("Такого пользователя не существует");
-                } while (!state1);
+                state = false;
+                drawAskMenu("Такого пользователя не существует");
             }
-
         } while (!state);
         return login;
     }

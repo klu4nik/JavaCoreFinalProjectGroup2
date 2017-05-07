@@ -39,8 +39,8 @@ public class API_Impl {
 
     }
 
-    public Booking findBook(Booking newBook) {
-        return findBook(newBook);
+    public Integer findBook(Booking newBook) {
+        return bookingController.findBook(newBook);
     }
 
     public List<Hotel> findHotelByName(String hotel) {

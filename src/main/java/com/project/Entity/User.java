@@ -1,11 +1,9 @@
 package Entity;
 
-import java.io.Serializable;
-
 /**
  * Created by MYKOLA.GOROKHOV on 20.04.2017.
  */
-public class User implements Serializable {
+public class User {
     private Integer id;
     private String firstName;
     private String lastName;

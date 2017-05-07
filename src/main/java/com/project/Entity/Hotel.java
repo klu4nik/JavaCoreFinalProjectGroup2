@@ -1,11 +1,9 @@
 package Entity;
 
-import java.io.Serializable;
-
 /**
  * Created by MYKOLA.GOROKHOV on 21.04.2017.
  */
-public class Hotel implements Serializable {
+public class Hotel {
     private Integer id;
     private String hotelName;
     private String city;

@@ -1,12 +1,9 @@
 package Entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  * Created by MYKOLA.GOROKHOV on 21.04.2017.
  */
-public class Room implements Serializable {
+public class Room {
     private Integer roomNumber;
     private Hotel hotel;
     private Integer numberOfperson;

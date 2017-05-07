@@ -22,6 +22,14 @@ public class UserController {
         }
     }
 
+    public boolean isUsersDBisEmpty(){
+        try {
+            return dui.get().isEmpty();
+        } catch (Exception e){
+            return false;
+        }
+    }
+
     public User findUserById(Integer id) {
 
         return users.get(id);

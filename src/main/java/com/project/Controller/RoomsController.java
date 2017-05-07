@@ -23,6 +23,14 @@ public class RoomsController {
         }
     }
 
+    public boolean isRoomsDBisEmpty(){
+        try {
+            return dri.get().isEmpty();
+        } catch (Exception e){
+            return false;
+        }
+    }
+
     public void flush() {
         try {
             dri.set(rooms);

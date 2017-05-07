@@ -7,7 +7,9 @@ import Controller.UserController;
 import Entity.Booking;
 import Entity.Hotel;
 import Entity.Room;
+import Entity.User;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,10 @@ public class API_Impl {
     private HashMap<Integer, Room> rooms;
 
 
+    public boolean isAllDBPresented() {
+        return !hotelsController.isHotelsDBisEmpty() && !userController.isUsersDBisEmpty() && !roomsController.isRoomsDBisEmpty();
+    }
+
     public String checkLoginIsPresented(String login) {
         boolean state = false;
         if (!login.equals("") && userController.findUserByLogin(login) != null) {
@@ -33,9 +39,15 @@ public class API_Impl {
 
     }
 
+    public Booking findBook(Booking newBook) {
+        return findBook(newBook);
+    }
+
     public List<Hotel> findHotelByName(String hotel) {
         return hotelsController.findHotelByName(hotel);
     }
+
+
 
     public List<Room> findFreeRoomsForDatesForPersonNumber(Integer hotelID, Integer numberOfPersons, Date startDate, Date endDate) {
         //List<Room> foundRooms = roomsController.findRoomByHotel(hotelsController.findHotelById(hotelID).get(0));
@@ -62,5 +74,51 @@ public class API_Impl {
         return foundRooms;
 
     }
+
+    public User findUserByLogin(String login) {
+        return userController.findUserByLogin(login);
+    }
+
+    public void addBook(Booking book){
+        bookingController.addBook(book);
+    }
+    public List<Booking> findBooksByHotel(Integer id_hotel){
+        return bookingController.findBooksByHotel(id_hotel);
+    }
+
+    public Date convertStringToDate(String stringDate) {
+        SimpleDateFormat simpleFormat2 = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            return simpleFormat2.parse(stringDate);
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public List<Room> findRoomByHotel(Hotel hotel){
+        return roomsController.findRoomByHotel(hotel);
+    }
+
+    public  void flushHotel(){
+        hotelsController.flush();
+    }
+
+    public void flushBooking(){
+        bookingController.flush();
+    }
+
+    public void flushUser(){
+        userController.flush();
+    }
+
+    public void flushRoom(){
+        roomsController.flush();
+    }
+
+    public List<Hotel> findHotelById(Integer hotel_id){
+        return hotelsController.findHotelById(hotel_id);
+    }
+
 
 }

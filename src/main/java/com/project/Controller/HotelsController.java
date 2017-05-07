@@ -25,6 +25,14 @@ public class HotelsController {
         }
     }
 
+    public boolean isHotelsDBisEmpty(){
+        try {
+                    return dhi.get().isEmpty();
+        } catch (Exception e){
+            return false;
+        }
+    }
+
     public void flush() {
         try {
             dhi.set(hotels);

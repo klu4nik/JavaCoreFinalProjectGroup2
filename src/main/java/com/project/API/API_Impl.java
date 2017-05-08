@@ -55,22 +55,26 @@ public class API_Impl {
         Date bookingStartDate;
         Date bookingEndDate;
         //Из выборки  удаляются комнаты  забронированные другими пользователями  на эти  даты
-        for (Room tempRoom : foundRooms) {
-            for (Booking tempBook : bookingController.findBookingByRoomInHotel(tempRoom.getRoomNumber(), hotelID)) {
-                bookingStartDate = tempBook.getDate_start();
-                bookingEndDate = tempBook.getDate_end();
-                if (tempBook.getRoom_Number().equals(tempRoom.getRoomNumber()) &&
-                        tempBook.getHotel_id().equals(tempRoom.getHotel().getId())) {
+        if (foundRooms.size() > 0) {
+            for (Room tempRoom : foundRooms) {
+                for (Booking tempBook : bookingController.findBookingByRoomInHotel(tempRoom.getRoomNumber(), hotelID)) {
+                    bookingStartDate = tempBook.getDate_start();
+                    bookingEndDate = tempBook.getDate_end();
+                    if (tempBook.getRoom_Number().equals(tempRoom.getRoomNumber()) &&
+                            tempBook.getHotel_id().equals(tempRoom.getHotel().getId())) {
 
-                    if (!(bookingStartDate.before(startDate) && bookingEndDate.before(startDate)) ||
-                            !(bookingStartDate.after(endDate) && (bookingEndDate.after(endDate)) ||
-                                    !(bookingStartDate.before(bookingStartDate) && bookingEndDate.after(endDate)))) {
-                        foundRooms.remove(tempRoom);
+                        if (!(bookingStartDate.before(startDate) && bookingEndDate.before(startDate)) ||
+                                !(bookingStartDate.after(endDate) && (bookingEndDate.after(endDate)) ||
+                                        !(bookingStartDate.before(bookingStartDate) && bookingEndDate.after(endDate)))) {
+                            foundRooms.remove(tempRoom);
+                        }
                     }
                 }
             }
+            return foundRooms;
         }
-        return foundRooms;
+        return null;
+
 
     }
 

@@ -80,12 +80,10 @@ public class UI_Booking {
         System.out.println("+-----------------------------------------+");
         System.out.println("|          FIND BOOKING BY NAME           |");
         System.out.println("+-----------------------------------------+\n");
-
-        System.out.println("Введите название отеля: ");
-
         Integer hotelId = getHotelIDByName();
         List<Hotel> foundHotels = apiImpl.findHotelById(hotelId);
         for (Hotel hotel : foundHotels) {
+            System.out.println(hotel);
             apiImpl.printBooks(apiImpl.findBooksByHotel(hotel.getId()));
         }
         Scanner scanner = new Scanner(System.in);
@@ -275,26 +273,26 @@ public class UI_Booking {
     private Integer chooseRoomNumber(List<Room> foundRooms) {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
-        if(foundRooms.size() > 0){
-        System.out.println("Выберите комнату:");
+        if (foundRooms.size() > 0) {
+            System.out.println("Выберите комнату:");
 
-        for (int i = 0; i < foundRooms.size(); i++) {
-            System.out.println(i + ": " + foundRooms.get(i));
+            for (int i = 0; i < foundRooms.size(); i++) {
+                System.out.println(i + ": " + foundRooms.get(i));
 
-        }
-        do {
-            String choice = String.valueOf(scanner.nextLine().toLowerCase());
-            try {
-                Integer choiceInt = Integer.parseInt(choice);
-                if (Integer.parseInt(choice) <= foundRooms.size() && choiceInt > 0) {
-                    state = true;
-                    return foundRooms.get(Integer.parseInt(choice)).getRoomNumber();
-                } else System.out.println("Введите корректный номер в списке");
-            } catch (Exception e) {
-                System.out.println("Введите корректное число.");
             }
-        } while (!state);
-        } else{
+            do {
+                String choice = String.valueOf(scanner.nextLine().toLowerCase());
+                try {
+                    Integer choiceInt = Integer.parseInt(choice);
+                    if (Integer.parseInt(choice) <= foundRooms.size() && choiceInt > 0) {
+                        state = true;
+                        return foundRooms.get(Integer.parseInt(choice)).getRoomNumber();
+                    } else System.out.println("Введите корректный номер в списке");
+                } catch (Exception e) {
+                    System.out.println("Введите корректное число.");
+                }
+            } while (!state);
+        } else {
             System.out.println("На выбранные даты нет свободных номеров:");
         }
         return null;
@@ -331,11 +329,8 @@ public class UI_Booking {
 
             date = scanner.nextLine();
             if (apiImpl.convertStringToDate(date) == null) {
-                do {
-                    drawAskMenu("Дата введена некоректно:");
-                } while (!state1);
+                drawAskMenu("Дата введена некоректно:");
             } else {
-
                 state = true;
             }
 
@@ -352,12 +347,8 @@ public class UI_Booking {
 
             date = scanner.nextLine();
             if (apiImpl.convertStringToDate(date) == null || apiImpl.convertStringToDate(date).before(startDateBooking)) {
-                do {
-                    drawAskMenu("Дата введена некоректно:");
-
-                } while (!state1);
+                drawAskMenu("Дата введена некоректно:");
             } else {
-
                 state = true;
             }
         } while (!state);

@@ -70,9 +70,8 @@ public class BookingController {
     }
 
     public List<Booking> findBookingByRoomInHotel(Integer roomNumber, Integer hotelID) {
-
         List<Booking> books =
-                booking.values().stream().filter(p -> p.getRoom_Number().equals(roomNumber)).filter(p -> p.getHotel_id().equals(hotelID)).collect(Collectors.toList());
+                booking.values().stream().filter(p -> p.getRoom_Number().equals(roomNumber) && p.getHotel_id().equals(hotelID)).collect(Collectors.toList());
         return books;
     }
 

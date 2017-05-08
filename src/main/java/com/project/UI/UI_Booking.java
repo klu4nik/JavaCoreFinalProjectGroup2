@@ -367,5 +367,7 @@ public class UI_Booking {
         Date[] datesBooking = {startDateBooking, endDateBooking};
         return datesBooking;
     }
+
+
 }
 

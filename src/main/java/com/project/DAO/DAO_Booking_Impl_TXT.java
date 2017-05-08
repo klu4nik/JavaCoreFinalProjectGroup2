@@ -47,7 +47,7 @@ public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
             String date_start = stringTokenizer.nextToken();
             String date_end = stringTokenizer.nextToken();
 
-            Booking nextBooking = new Booking(user_id, room_Number, hotel_id, new Date(date_start), new Date(date_end));
+            Booking nextBooking = new Booking(user_id, room_Number, hotel_id, new Date(Long.parseLong(date_start)), new Date(Long.parseLong(date_end)));
 
             result.put(user_id, nextBooking);
         }

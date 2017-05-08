@@ -83,7 +83,12 @@ public class API_Impl {
     }
 
     public List<Booking> findBooksByHotel(Integer id_hotel) {
-        return bookingController.findBooksByHotel(id_hotel);
+        try {
+            return bookingController.findBooksByHotel(id_hotel);
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
     public Date convertStringToDate(String stringDate) {
@@ -101,8 +106,8 @@ public class API_Impl {
             return book.getUser_login() + " забронировал комнату №" +
                     book.getRoom_Number().toString() + " в отеле " +
                     hotelsController.findHotelById(book.getHotel_id()).get(0).getHotelName() + " c " +
-                    book. getDate_start().toString() +" по " + book.getDate_end().toString();
-        } catch (Exception e0){
+                    book.getDate_start().toString() + " по " + book.getDate_end().toString();
+        } catch (Exception e0) {
             return "Такая бронь не найдена";
         }
     }
@@ -129,6 +134,30 @@ public class API_Impl {
 
     public List<Hotel> findHotelById(Integer hotel_id) {
         return hotelsController.findHotelById(hotel_id);
+    }
+
+    public List<Booking> findBookingByLogin(String login) {
+        try {
+            return bookingController.findBookingByUserLogin(login);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Method prints List<Booking>  in the usefull format
+     *
+     * @param booking
+     */
+    public void printBooks(List<Booking> booking) {
+
+        try {
+            for (Booking tempBook : booking
+                    ) {
+                System.out.println(showAdaptedContentFromBooking(tempBook));
+            }
+        } catch (Exception e) {
+        }
     }
 
 

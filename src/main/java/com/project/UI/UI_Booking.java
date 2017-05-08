@@ -57,14 +57,10 @@ public class UI_Booking {
                 case ITEM_4:
                     cls();
                     findBookingByHotelName();
-                    System.out.println("Нажмите Enter ...");
-                    scanner.nextLine();
                     break;
                 case ITEM_5:
                     cls();
-                    //findHotelByCity();
-                    System.out.println("Нажмите Enter ...");
-                    scanner.nextLine();
+                    drawSearchMenuByLogin();
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");
@@ -87,15 +83,29 @@ public class UI_Booking {
 
         System.out.println("Введите название отеля: ");
 
-        Scanner scanner = new Scanner(System.in);
-        String hotelName = scanner.nextLine();
-        if (!hotelName.equals("")) {
-            System.out.println("Найденые бронирования: ");
-            List<Hotel> foundHotels = apiImpl.findHotelByName(hotelName);
-            for (Hotel hotel : foundHotels) {
-                System.out.println(apiImpl.findBooksByHotel(hotel.getId()));
-            }
+        Integer hotelId = getHotelIDByName();
+        List<Hotel> foundHotels = apiImpl.findHotelById(hotelId);
+        for (Hotel hotel : foundHotels) {
+            apiImpl.printBooks(apiImpl.findBooksByHotel(hotel.getId()));
         }
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Нажмите Enter ...");
+        scanner.nextLine();
+    }
+
+
+    private void drawSearchMenuByLogin() {
+        System.out.println("+-----------------------------------------+");
+        System.out.println("|            FIND BOOKING MENU            |");
+        System.out.println("+-----------------------------------------+");
+        System.out.println("|          FIND BOOKING BY Login          |");
+        System.out.println("+-----------------------------------------+\n");
+        String login = inputLogin();
+        apiImpl.printBooks(apiImpl.findBookingByLogin(login));
+        System.out.println();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Нажмите Enter ...");
+        scanner.nextLine();
     }
 
     //Нужно доработать
@@ -143,6 +153,8 @@ public class UI_Booking {
             if (apiImpl.findBook(newBook).equals(0)) {
                 System.out.println("Бронирование добавлено");
                 apiImpl.addBook(newBook);
+                apiImpl.flushBooking();
+
 
             } else {
                 System.out.println("\n\nТакой заказ уже есть . . .");
@@ -150,23 +162,11 @@ public class UI_Booking {
             }
         } else {
             drawAskMenu("Одна из баз пуста. Необходимо заполнить все базы");
-            String choice = String.valueOf(scanner.next().toLowerCase().charAt(0));
-            switch (choice) {
-                case ITEM_1:
-                    state = false;
-                    break;
-                case EXIT:
-                    state = true;
-                    drawMainMenu();
-                    break;
-            }
+
+
         }
-
-
-        //public Booking(Integer user_id, Integer room_Number, Integer hotel_id, Date date_start, Date date_end)
-
-
     }
+
 
     private void drawMainMenu() {
         cls();
@@ -176,7 +176,7 @@ public class UI_Booking {
         System.out.println("|" + ITEM_1 + ". Добавить бронь                        |");
         System.out.println("|" + ITEM_2 + ". Редактировать бронирование            |");
         System.out.println("|" + ITEM_3 + ". Удалить бронь                         |");
-        System.out.println("|" + ITEM_4 + ". Поиск брони по имени                  |");
+        System.out.println("|" + ITEM_4 + ". Поиск брони по имени отеля            |");
         System.out.println("|" + ITEM_5 + ". Поиск брони по пользователю           |");
         System.out.println("|                                         |");
         System.out.println("|" + EXIT + ". В предыдущее меню                     |");
@@ -240,7 +240,6 @@ public class UI_Booking {
                 state = false;
                 drawAskMenu("Такого отеля не существует");
             }
-
         } while (!state);
 
         List<Hotel> foundHotels = apiImpl.findHotelByName(hotel);
@@ -269,16 +268,14 @@ public class UI_Booking {
         } else if (numberOFHotelsWithName > 0) {
             return foundHotels.get(0).getId();
         }
-
         return null;
-
     }
 
 
     private Integer chooseRoomNumber(List<Room> foundRooms) {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
-
+        if(foundRooms.size() > 0){
         System.out.println("Выберите комнату:");
 
         for (int i = 0; i < foundRooms.size(); i++) {
@@ -297,6 +294,9 @@ public class UI_Booking {
                 System.out.println("Введите корректное число.");
             }
         } while (!state);
+        } else{
+            System.out.println("На выбранные даты нет свободных номеров:");
+        }
         return null;
     }
 
@@ -360,14 +360,10 @@ public class UI_Booking {
 
                 state = true;
             }
-
-
         } while (!state);
         endDateBooking = apiImpl.convertStringToDate(date);
         Date[] datesBooking = {startDateBooking, endDateBooking};
         return datesBooking;
     }
-
-
 }
 

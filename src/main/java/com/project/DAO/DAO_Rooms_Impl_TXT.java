@@ -33,7 +33,7 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
         }
 
 //        читаем список Пользователей
-        HashMap<String, User> usersFromFile = new HashMap<String, User>();
+        HashMap<Integer, User> usersFromFile = new HashMap<Integer, User>();
         try {
             usersFromFile = new DAO_Users_Impl_TXT().get();
         } catch (IOException e) {

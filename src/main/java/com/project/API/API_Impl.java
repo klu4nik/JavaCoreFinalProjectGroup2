@@ -26,28 +26,52 @@ public class API_Impl {
 
 
     public boolean isAllDBPresented() {
-        return !hotelsController.isHotelsDBisEmpty() && !userController.isUsersDBisEmpty() && !roomsController.isRoomsDBisEmpty();
+        try {
+            return !hotelsController.isHotelsDBisEmpty() && !userController.isUsersDBisEmpty() && !roomsController.isRoomsDBisEmpty();
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public String checkLoginIsPresented(String login) {
-        boolean state = false;
-        if (!login.equals("") && userController.findUserByLogin(login) != null) {
-            return login;
-        } else {
+        try {
+            if (!login.equals("") && userController.findUserByLogin(login) != null) {
+                return login;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
             return null;
         }
 
     }
 
     public Integer findBook(Booking newBook) {
-        return bookingController.findBook(newBook);
+        try {
+            return bookingController.findBook(newBook);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<Hotel> findHotelByName(String hotel) {
-        return hotelsController.findHotelByName(hotel);
+        try {
+            return hotelsController.findHotelByName(hotel);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
+    /**
+     * Methos search fre rooms in hotel for sended number of persons and for sended dates
+     *
+     * @param hotelID
+     * @param numberOfPersons
+     * @param startDate
+     * @param endDate
+     * @return
+     */
     public List<Room> findFreeRoomsForDatesForPersonNumber(Integer hotelID, Integer numberOfPersons, Date startDate, Date endDate) {
         //List<Room> foundRooms = roomsController.findRoomByHotel(hotelsController.findHotelById(hotelID).get(0));
         //Формируем  выборку комнат подходящих в заданном отеле
@@ -85,14 +109,35 @@ public class API_Impl {
 
     }
 
+    /**
+     * Method search users by login
+     *
+     * @param login
+     * @return
+     */
     public User findUserByLogin(String login) {
-        return userController.findUserByLogin(login);
+        try {
+            return userController.findUserByLogin(login);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
+    /**
+     * method add book into the DB
+     *
+     * @param book
+     */
     public void addBook(Booking book) {
         bookingController.addBook(book);
     }
 
+    /**
+     * method retirns  list of books founded in sended hotel
+     *
+     * @param id_hotel
+     * @return
+     */
     public List<Booking> findBooksByHotel(Integer id_hotel) {
         try {
             return bookingController.findBooksByHotel(id_hotel);
@@ -102,6 +147,12 @@ public class API_Impl {
 
     }
 
+    /**
+     * Method converts string dates "MM/dd/yyyy" to Date
+     *
+     * @param stringDate
+     * @return
+     */
     public Date convertStringToDate(String stringDate) {
         SimpleDateFormat simpleFormat2 = new SimpleDateFormat("MM/dd/yyyy");
         try {
@@ -112,44 +163,82 @@ public class API_Impl {
 
     }
 
+    /**
+     * Method  convert books to more comfort formate
+     *
+     * @param book
+     * @return
+     */
     public String showAdaptedContentFromBooking(Booking book) {
         try {
             return userController.findUserById(book.getUser_id()).getLogin() + " забронировал комнату №" +
                     book.getRoom_Number().toString() + " в отеле " +
                     hotelsController.findHotelById(book.getHotel_id()).get(0).getHotelName() + " c " +
                     book.getDate_start().toString() + " по " + book.getDate_end().toString();
-        } catch (Exception e0) {
-            return "Такая бронь не найдена";
+        } catch (Exception e) {
+            return "Ошибка поиска";
         }
     }
 
+    /**
+     * Method returns rooms from hotel
+     *
+     * @param hotel
+     * @return
+     */
     public List<Room> findRoomByHotel(Hotel hotel) {
         return roomsController.findRoomByHotel(hotel);
     }
 
+    /**
+     * Method sends changes  to the Hotel_db
+     */
     public void flushHotel() {
         hotelsController.flush();
     }
 
+    /**
+     * Method sends changes  to the Booking_db
+     */
     public void flushBooking() {
         bookingController.flush();
     }
 
+    /**
+     * Method sends changes  to the User_db
+     */
     public void flushUser() {
         userController.flush();
     }
 
+
+    /**
+     * Method sends changes  to the Room_db
+     */
     public void flushRoom() {
         roomsController.flush();
     }
 
+    /**
+     * Method search hotels with id
+     *
+     * @param hotel_id
+     * @return
+     */
     public List<Hotel> findHotelById(Integer hotel_id) {
         return hotelsController.findHotelById(hotel_id);
     }
 
+    /**
+     * Method returns books for user login
+     *
+     * @param login
+     * @return
+     */
     public List<Booking> findBookingByLogin(String login) {
         try {
-            return bookingController.findBookingByUserLogin(login);
+            Integer id = userController.findUserByLogin(login).getId();
+            return bookingController.findBookingByUserID(id);
         } catch (Exception e) {
             return null;
         }
@@ -169,6 +258,16 @@ public class API_Impl {
             }
         } catch (Exception e) {
         }
+    }
+
+    public void removeBook(Booking booking) {
+        try {
+            bookingController.deleteBooking(booking);
+            flushBooking();
+        } catch (Exception e) {
+            System.out.println("Невозможно удалить бронь");
+        }
+
     }
 
 

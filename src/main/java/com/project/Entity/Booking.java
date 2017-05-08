@@ -23,6 +23,15 @@ public class Booking {
         this.id = this.hashCode();
     }
 
+    public Booking(Integer id, Integer user_id, Integer room_Number, Integer hotel_id, Date date_start, Date date_end) {
+        this.user_id = user_id;
+        this.room_Number = room_Number;
+        this.hotel_id = hotel_id;
+        this.date_start = date_start;
+        this.date_end = date_end;
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

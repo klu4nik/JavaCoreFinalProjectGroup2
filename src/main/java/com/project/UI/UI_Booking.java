@@ -81,10 +81,10 @@ public class UI_Booking {
         System.out.println("|          FIND BOOKING BY NAME           |");
         System.out.println("+-----------------------------------------+\n");
         Integer hotelId = getHotelIDByName();
-        List<Hotel> foundHotels = apiImpl.findHotelById(hotelId);
-        for (Hotel hotel : foundHotels) {
-            apiImpl.printBooks(apiImpl.findBooksByHotel(hotel.getId()));
-        }
+
+        apiImpl.printBooks(apiImpl.findBooksByHotel(hotelId));
+
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Нажмите Enter ...");
         scanner.nextLine();
@@ -106,6 +106,49 @@ public class UI_Booking {
     }
 
     //Нужно доработать
+
+    private void updateBookingMenu() {
+        System.out.println("+-----------------------------------------+");
+        System.out.println("|          UPDATE BOOKING MENU            |");
+        System.out.println("+-----------------------------------------+\n");
+
+        System.out.println("Введите логин пользователя: ");
+
+        Scanner scanner = new Scanner(System.in);
+        String login = inputLogin();
+        List<Booking> foundBooks = apiImpl.findBookingByLogin(login);
+
+        if (foundBooks != null) {
+            System.out.println("Выберите бронирование:");
+
+            for (int i = 0; i < foundBooks.size(); i++) {
+                System.out.println(i + ": " + foundBooks.get(i));
+
+            }
+            boolean state = false;
+            do {
+                String choice = String.valueOf(scanner.nextLine().toLowerCase());
+                try {
+                    Integer choiceInt = Integer.parseInt(choice);
+                    if (choiceInt <= foundBooks.size() && choiceInt >= 0) {
+                        state = true;
+                        System.out.println("Бронь " + apiImpl.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
+                        apiImpl.removeBook(foundBooks.get(Integer.parseInt(choice)));
+                        apiImpl.flushBooking();
+                        new UI_Booking().AddBookingMenu();
+
+                    } else System.out.println("Введите корректный номер в списке");
+                } catch (Exception e) {
+                    System.out.println("Введите корректное число.");
+                }
+            } while (!state);
+        } else {
+            System.out.println("На выбранные даты нет свободных номеров:");
+        }
+
+
+    }
+
     private void DeleteBookingMenu() {
         System.out.println("+-----------------------------------------+");
         System.out.println("|          DELETE BOOKING MENU            |");
@@ -115,6 +158,34 @@ public class UI_Booking {
 
         Scanner scanner = new Scanner(System.in);
         String login = inputLogin();
+        List<Booking> foundBooks = apiImpl.findBookingByLogin(login);
+
+        if (foundBooks != null) {
+            System.out.println("Выберите бронирование:");
+
+            for (int i = 0; i < foundBooks.size(); i++) {
+                System.out.println(i + ": " + foundBooks.get(i));
+
+            }
+            boolean state = false;
+            do {
+                String choice = String.valueOf(scanner.nextLine().toLowerCase());
+                try {
+                    Integer choiceInt = Integer.parseInt(choice);
+                    if (choiceInt <= foundBooks.size() && choiceInt >= 0) {
+                        state = true;
+                        System.out.println("Бронь " + apiImpl.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
+                        apiImpl.removeBook(foundBooks.get(Integer.parseInt(choice)));
+                        apiImpl.flushBooking();
+
+                    } else System.out.println("Введите корректный номер в списке");
+                } catch (Exception e) {
+                    System.out.println("Введите корректное число.");
+                }
+            } while (!state);
+        } else {
+            System.out.println("На выбранные даты нет свободных номеров:");
+        }
 
 
     }
@@ -151,10 +222,14 @@ public class UI_Booking {
                     System.out.println("Бронирование добавлено");
                     apiImpl.addBook(newBook);
                     apiImpl.flushBooking();
+                    System.out.println();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                 } else {
                     System.out.println("\n\nТакой заказ уже есть . . .");
                     AddBookingMenu();
                 }
+            } else {
                 System.out.println("В выбранном отеле нет номеров. создайте другой заказ.");
                 try {
                     run();
@@ -163,8 +238,6 @@ public class UI_Booking {
             }
         } else {
             drawAskMenu("Одна из баз пуста. Необходимо заполнить все базы");
-
-
         }
     }
 
@@ -204,7 +277,7 @@ public class UI_Booking {
                 cls();
                 return true;
             case EXIT:
-                drawMainMenu();
+                new UI_Booking().drawMainMenu();
                 break;
         }
         return false;
@@ -288,7 +361,7 @@ public class UI_Booking {
                 String choice = String.valueOf(scanner.nextLine().toLowerCase());
                 try {
                     Integer choiceInt = Integer.parseInt(choice);
-                    if (choiceInt <= foundRooms.size() && choiceInt > 0) {
+                    if (choiceInt <= foundRooms.size() && choiceInt >= 0) {
                         state = true;
                         return foundRooms.get(Integer.parseInt(choice)).getRoomNumber();
                     } else System.out.println("Введите корректный номер в списке");

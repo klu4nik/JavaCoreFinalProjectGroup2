@@ -1,9 +1,11 @@
 package Controller;
 
-import DAO.*;
+import DAO.DAO_Users_Impl_TXT;
 import Entity.User;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by MYKOLA.GOROKHOV on 28.04.2017.
@@ -11,7 +13,7 @@ import java.util.HashMap;
 
 
 public class UserController {
-    private HashMap<String, User> users;
+    private HashMap<Integer, User> users;
     private DAO_Users_Impl_TXT dui = new DAO_Users_Impl_TXT();
 
     public UserController() {
@@ -22,10 +24,10 @@ public class UserController {
         }
     }
 
-    public boolean isUsersDBisEmpty(){
+    public boolean isUsersDBisEmpty() {
         try {
             return dui.get().isEmpty();
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -37,18 +39,20 @@ public class UserController {
 
     public User findUserByLogin(String login) {
         try {
-            return users.get(login);
+            List<User> userNames =
+                    users.values().stream().filter(p -> p.getLogin().equals(login)).collect(Collectors.toList());
+            return userNames.get(0);
         } catch (Exception e) {
             return null;
         }
     }
 
-    public HashMap<String, User> addUser(User user) {
-        users.put(user.getLogin(), user);
+    public HashMap<Integer, User> addUser(User user) {
+        users.put(user.getId(), user);
         return users;
     }
 
-    public HashMap<String, User> deleteUserByLogin(String login) {
+    public HashMap<Integer, User> deleteUserByLogin(String login) {
         users.remove(login);
         return users;
     }

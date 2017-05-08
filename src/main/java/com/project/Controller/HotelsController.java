@@ -25,10 +25,10 @@ public class HotelsController {
         }
     }
 
-    public boolean isHotelsDBisEmpty(){
+    public boolean isHotelsDBisEmpty() {
         try {
-                    return dhi.get().isEmpty();
-        } catch (Exception e){
+            return dhi.get().isEmpty();
+        } catch (Exception e) {
             return false;
         }
     }

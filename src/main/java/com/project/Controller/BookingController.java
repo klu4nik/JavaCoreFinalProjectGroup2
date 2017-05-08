@@ -51,14 +51,14 @@ public class BookingController {
     }
 
     public HashMap<Integer, Booking> deleteBooking(Booking book) {
-        booking.remove(book.getId());
+        booking.values().removeIf(p -> p.equals(book));
         flush();
         return booking;
     }
 
-    public List<Booking> findBookingByUserLogin(String username) {
+    public List<Booking> findBookingByUserID(Integer userID) {
         List<Booking> books =
-                booking.values().stream().filter(p -> p.getUser_id().equals(username)).collect(Collectors.toList());
+                booking.values().stream().filter(p -> p.getUser_id().equals(userID)).collect(Collectors.toList());
         return books;
     }
 
@@ -75,7 +75,7 @@ public class BookingController {
         return books;
     }
 
-    public HashMap<Integer, Booking> updateHotel(Booking oldBooking, Booking newBooking) {
+    public HashMap<Integer, Booking> updateBooking(Booking oldBooking, Booking newBooking) {
         deleteBooking(oldBooking);
         addBook(newBooking);
         return booking;

@@ -22,14 +22,14 @@ public class RoomsController {
             e.getMessage();
         }
     }
-    public boolean isRoomsDBisEmpty(){
+
+    public boolean isRoomsDBisEmpty() {
         try {
             return dri.get().isEmpty();
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
-
 
 
     public void flush() {
@@ -79,6 +79,6 @@ public class RoomsController {
     }
 
     public List<Room> getRoomsByHotelAndNumberOfPersons(Integer hotelID, Integer numberOfPersons) {
-        return rooms.values().stream().filter(p -> p.getHotel().getId().equals(hotelID) && p.getNumberOfperson() > numberOfPersons).collect(Collectors.toList());
+        return rooms.values().stream().filter(p -> p.getHotel().getId().equals(hotelID) && p.getNumberOfperson() >= numberOfPersons).collect(Collectors.toList());
     }
 }

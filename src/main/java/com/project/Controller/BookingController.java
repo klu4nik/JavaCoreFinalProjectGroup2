@@ -58,7 +58,7 @@ public class BookingController {
 
     public List<Booking> findBookingByUserLogin(String username) {
         List<Booking> books =
-                booking.values().stream().filter(p -> p.getUser_login().equals(username)).collect(Collectors.toList());
+                booking.values().stream().filter(p -> p.getUser_id().equals(username)).collect(Collectors.toList());
         return books;
     }
 
@@ -71,7 +71,7 @@ public class BookingController {
 
     public List<Booking> findBookingByRoomInHotel(Integer roomNumber, Integer hotelID) {
         List<Booking> books =
-                booking.values().stream().filter(p -> p.getRoom_Number().equals(roomNumber) && p.getHotel_id().equals(hotelID)).collect(Collectors.toList());
+                booking.values().stream().filter(p -> p.getHotel_id().equals(hotelID) && p.getRoom_Number().equals(roomNumber)).collect(Collectors.toList());
         return books;
     }
 

@@ -69,6 +69,14 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
     @Override
     public void set(HashMap<Integer, Room> hashMapRooms) {
         File roomsFile = new File(PATH);
+        try {
+            //проверяем, что если файл не существует то создаем его
+            File file = new File(PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+        }
 
         try (FileWriter writer = new FileWriter(roomsFile)) {
             for (HashMap.Entry<Integer, Room> currentEntery : hashMapRooms.entrySet()) {

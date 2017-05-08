@@ -83,7 +83,6 @@ public class UI_Booking {
         Integer hotelId = getHotelIDByName();
         List<Hotel> foundHotels = apiImpl.findHotelById(hotelId);
         for (Hotel hotel : foundHotels) {
-            System.out.println(hotel);
             apiImpl.printBooks(apiImpl.findBooksByHotel(hotel.getId()));
         }
         Scanner scanner = new Scanner(System.in);
@@ -146,17 +145,21 @@ public class UI_Booking {
             numberOfPersons = getNumberOfPersons();
             room_Number =
                     chooseRoomNumber(apiImpl.findFreeRoomsForDatesForPersonNumber(hotelID, numberOfPersons, datesBooking[0], datesBooking[1]));
-
-            Booking newBook = new Booking(user_id, room_Number, hotelID, datesBooking[0], datesBooking[1]);
-            if (apiImpl.findBook(newBook).equals(0)) {
-                System.out.println("Бронирование добавлено");
-                apiImpl.addBook(newBook);
-                apiImpl.flushBooking();
-
-
-            } else {
-                System.out.println("\n\nТакой заказ уже есть . . .");
-                AddBookingMenu();
+            if (room_Number != -1) {
+                Booking newBook = new Booking(user_id, room_Number, hotelID, datesBooking[0], datesBooking[1]);
+                if (apiImpl.findBook(newBook).equals(0)) {
+                    System.out.println("Бронирование добавлено");
+                    apiImpl.addBook(newBook);
+                    apiImpl.flushBooking();
+                } else {
+                    System.out.println("\n\nТакой заказ уже есть . . .");
+                    AddBookingMenu();
+                }
+                System.out.println("В выбранном отеле нет номеров. создайте другой заказ.");
+                try {
+                    run();
+                } catch (Exception e) {
+                }
             }
         } else {
             drawAskMenu("Одна из баз пуста. Необходимо заполнить все базы");
@@ -195,7 +198,7 @@ public class UI_Booking {
         System.out.println(message);
         System.out.println("|" + ITEM_1 + ". Повторить попытку                     |");
         System.out.println("|" + EXIT + ". В главное меню                        |");
-        String choice = String.valueOf(scanner.nextLine().toLowerCase().charAt(0));
+        String choice = String.valueOf(scanner.nextLine().toLowerCase());
         switch (choice) {
             case ITEM_1:
                 cls();
@@ -273,7 +276,8 @@ public class UI_Booking {
     private Integer chooseRoomNumber(List<Room> foundRooms) {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
-        if (foundRooms.size() > 0) {
+        System.out.println(foundRooms);
+        if (foundRooms != null) {
             System.out.println("Выберите комнату:");
 
             for (int i = 0; i < foundRooms.size(); i++) {
@@ -284,7 +288,7 @@ public class UI_Booking {
                 String choice = String.valueOf(scanner.nextLine().toLowerCase());
                 try {
                     Integer choiceInt = Integer.parseInt(choice);
-                    if (Integer.parseInt(choice) <= foundRooms.size() && choiceInt > 0) {
+                    if (choiceInt <= foundRooms.size() && choiceInt > 0) {
                         state = true;
                         return foundRooms.get(Integer.parseInt(choice)).getRoomNumber();
                     } else System.out.println("Введите корректный номер в списке");
@@ -295,7 +299,7 @@ public class UI_Booking {
         } else {
             System.out.println("На выбранные даты нет свободных номеров:");
         }
-        return null;
+        return -1;
     }
 
     public Integer getNumberOfPersons() {

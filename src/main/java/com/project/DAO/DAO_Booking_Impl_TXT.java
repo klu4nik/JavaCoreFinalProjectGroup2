@@ -23,6 +23,14 @@ public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
 //        Читаем файл построчно
         List<String> currentBooking = null;
         try {
+            //проверяем, что если файл не существует то создаем его
+            File file = new File(PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+        }
+        try {
             currentBooking = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.getMessage();
@@ -36,8 +44,8 @@ public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
             Integer user_id = Integer.valueOf(stringTokenizer.nextToken());
             Integer room_Number = Integer.valueOf(stringTokenizer.nextToken());
             Integer hotel_id = Integer.valueOf(stringTokenizer.nextToken());
-            Integer date_start = Integer.valueOf(stringTokenizer.nextToken());
-            Integer date_end = Integer.valueOf(stringTokenizer.nextToken());
+            String date_start = stringTokenizer.nextToken();
+            String date_end = stringTokenizer.nextToken();
 
             Booking nextBooking = new Booking(user_id, room_Number, hotel_id, new Date(date_start), new Date(date_end));
 
@@ -54,7 +62,7 @@ public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
             for (HashMap.Entry<Integer, Booking> currentEntery : hashMapBooking.entrySet()) {
                 writer.write(
                         currentEntery.getValue().getId().toString() + SEPARATOR +
-                                currentEntery.getValue().getUser_login().toString() + SEPARATOR +
+                                currentEntery.getValue().getUser_id().toString() + SEPARATOR +
                                 currentEntery.getValue().getRoom_Number().toString() + SEPARATOR +
                                 currentEntery.getValue().getHotel_id().toString() + SEPARATOR +
                                 currentEntery.getValue().getDate_start().getTime() + SEPARATOR +

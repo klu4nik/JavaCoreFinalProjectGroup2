@@ -25,6 +25,14 @@ public class DAO_Hotels_Impl_TXT implements DAO<HashMap<Integer, Hotel>> {
 //        Читаем файл построчно
         List<String> currentHotel = null;
         try {
+            //проверяем, что если файл не существует то создаем его
+            File file = new File(PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+        }
+        try {
             currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);

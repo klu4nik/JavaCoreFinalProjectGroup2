@@ -51,27 +51,34 @@ public class API_Impl {
     public List<Room> findFreeRoomsForDatesForPersonNumber(Integer hotelID, Integer numberOfPersons, Date startDate, Date endDate) {
         //List<Room> foundRooms = roomsController.findRoomByHotel(hotelsController.findHotelById(hotelID).get(0));
         //Формируем  выборку комнат подходящих в заданном отеле
-        List<Room> foundRooms = roomsController.getRoomsByHotelAndNumberOfPersons(hotelID, numberOfPersons);
-        Date bookingStartDate;
-        Date bookingEndDate;
-        //Из выборки  удаляются комнаты  забронированные другими пользователями  на эти  даты
-        if (foundRooms.size() > 0) {
-            for (Room tempRoom : foundRooms) {
-                for (Booking tempBook : bookingController.findBookingByRoomInHotel(tempRoom.getRoomNumber(), hotelID)) {
-                    bookingStartDate = tempBook.getDate_start();
-                    bookingEndDate = tempBook.getDate_end();
-                    if (tempBook.getRoom_Number().equals(tempRoom.getRoomNumber()) &&
-                            tempBook.getHotel_id().equals(tempRoom.getHotel().getId())) {
+        try {
+            List<Room> foundRooms = roomsController.getRoomsByHotelAndNumberOfPersons(hotelID, numberOfPersons);
+            Date bookingStartDate;
+            Date bookingEndDate;
+            //Из выборки  удаляются комнаты  забронированные другими пользователями  на эти  даты
+            if (foundRooms.size() > 0) {
+                for (Room tempRoom : foundRooms) {
+                    List<Booking> foundBooks = bookingController.findBookingByRoomInHotel(tempRoom.getRoomNumber(), hotelID);
+                    if (foundBooks.size() > 0) {
+                        for (Booking tempBook : foundBooks) {
+                            bookingStartDate = tempBook.getDate_start();
+                            bookingEndDate = tempBook.getDate_end();
+                            if (tempBook.getRoom_Number().equals(tempRoom.getRoomNumber()) &&
+                                    tempBook.getHotel_id().equals(tempRoom.getHotel().getId())) {
 
-                        if (!(bookingStartDate.before(startDate) && bookingEndDate.before(startDate)) ||
-                                !(bookingStartDate.after(endDate) && (bookingEndDate.after(endDate)) ||
-                                        !(bookingStartDate.before(bookingStartDate) && bookingEndDate.after(endDate)))) {
-                            foundRooms.remove(tempRoom);
+                                if (!(bookingStartDate.before(startDate) && bookingEndDate.before(startDate)) ||
+                                        !(bookingStartDate.after(endDate) && (bookingEndDate.after(endDate)) ||
+                                                !(bookingStartDate.before(bookingStartDate) && bookingEndDate.after(endDate)))) {
+                                    foundRooms.remove(tempRoom);
+                                }
+                            }
                         }
                     }
                 }
+                return foundRooms;
             }
-            return foundRooms;
+        } catch (Exception e) {
+            return null;
         }
         return null;
 
@@ -107,7 +114,7 @@ public class API_Impl {
 
     public String showAdaptedContentFromBooking(Booking book) {
         try {
-            return book.getUser_login() + " забронировал комнату №" +
+            return userController.findUserById(book.getUser_id()).getLogin() + " забронировал комнату №" +
                     book.getRoom_Number().toString() + " в отеле " +
                     hotelsController.findHotelById(book.getHotel_id()).get(0).getHotelName() + " c " +
                     book.getDate_start().toString() + " по " + book.getDate_end().toString();

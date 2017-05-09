@@ -30,7 +30,6 @@ public class UI_Booking {
         do {
             drawMainMenu();
             //-----------------
-            //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             Scanner scanner = new Scanner(System.in);
             choice = String.valueOf(scanner.next().toLowerCase().charAt(0));
             scanner.nextLine();

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  *          Class-Controller. Provides functionality for working with the database of Rooms.
  * @see DAO_Rooms_Impl_TXT
  */
-public class RoomsController {
+public class RoomsController extends HotelsController{
     private HashMap<Integer, Room> rooms;
     private DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
 

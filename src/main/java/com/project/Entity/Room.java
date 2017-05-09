@@ -66,7 +66,7 @@ public class Room {
     public String toString() {
         return "Number: " + roomNumber +
                 ", Hotel: " + hotel.getHotelName() +
-                ", Number Of Person=" + numberOfPerson +
+                ", Number Of Person: " + numberOfPerson +
                 ", Price: " + price + "\n";
     }
 }

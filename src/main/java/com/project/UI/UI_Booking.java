@@ -43,9 +43,9 @@ public class UI_Booking {
                     break;
                 case ITEM_2:
                     cls();
-//                    editBookingMenu();
-//                    System.out.println("Нажмите Enter ...");
-//                    scanner.nextLine();
+                    updateBookingMenu();
+                    System.out.println("Нажмите Enter ...");
+                    scanner.nextLine();
                     break;
                 case ITEM_3:
                     cls();
@@ -71,7 +71,6 @@ public class UI_Booking {
 
         } while (!choice.equals(EXIT));
     }
-
 
     private void findBookingByHotelName() {
         System.out.println("+-----------------------------------------+");
@@ -268,8 +267,8 @@ public class UI_Booking {
         cls();
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
-        System.out.println("|" + ITEM_1 + ". Повторить попытку                     |");
-        System.out.println("|" + EXIT + ". В главное меню                        |");
+        System.out.println( ITEM_1 + ". Повторить попытку");
+        System.out.println( EXIT + ". В главное меню");
         String choice = String.valueOf(scanner.nextLine().toLowerCase());
         switch (choice) {
             case ITEM_1:

@@ -15,15 +15,25 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Created by MYKOLA.GOROKHOV on 23.04.2017.
+ * @version final :)
+ *          Implementation of DAO Interface for working with Rooms DB.
+ *          DB stored in txt file (location of the file is described by constant "PATH")
+ * @see DAO
+ * @see DAO_Users_Impl_TXT
+ * @see DAO_Hotels_Impl_TXT
  */
 public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
     final static String PATH = "./ext/DB/Rooms";
     final static char SEPARATOR = (char) 29;
 
+    /**
+     * Used for read DBs from the files.
+     *
+     * @return HashMap<RoomID, Room>
+     * @throws IOException
+     */
     @Override
     public HashMap<Integer, Room> get() throws IOException {
-
 //        читаем список отелей
         HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
         try {
@@ -31,7 +41,6 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);
         }
-
 //        читаем список Пользователей
         HashMap<Integer, User> usersFromFile = new HashMap<Integer, User>();
         try {
@@ -39,8 +48,6 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);
         }
-
-
 //        Читаем файл построчно
         List<String> currentRoom = null;
         try {
@@ -66,6 +73,12 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
         return result;
     }
 
+    /**
+     * Used for writing DB to the file.
+     *
+     * @@param hashMapRooms
+     * @see DAO#set(Object)
+     */
     @Override
     public void set(HashMap<Integer, Room> hashMapRooms) {
         File roomsFile = new File(PATH);
@@ -83,7 +96,7 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
                 writer.write(
                         currentEntery.getValue().getHotel().getId().toString() + SEPARATOR +
                                 currentEntery.getValue().getRoomNumber().toString() + SEPARATOR +
-                                currentEntery.getValue().getNumberOfperson().toString() + SEPARATOR +
+                                currentEntery.getValue().getNumberOfPerson().toString() + SEPARATOR +
                                 currentEntery.getValue().getPrice().toString());
 
                 writer.write(new StringBuilder().append((char) 13).append((char) 10).toString()); // Конец строки

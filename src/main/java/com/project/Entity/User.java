@@ -1,8 +1,21 @@
 package Entity;
 
+
+import Util.PasswordHashGenerator;
+
 /**
- * Created by MYKOLA.GOROKHOV on 20.04.2017.
+ * @version final :)
+ *          <p>
+ *          Entity-Class. Describes the entity of USER.
+ *          Have next fields:
+ *          id - for identification entry in DB;
+ *          firstName - First Name of user;
+ *          lastName - Last Name of user;
+ *          login - unique login of user;
+ *          password - login of user
+ * @see PasswordHashGenerator
  */
+
 public class User {
     private Integer id;
     private String firstName;
@@ -30,7 +43,6 @@ public class User {
         return id;
     }
 
-
     public String getFirstName() {
         return firstName;
     }
@@ -49,13 +61,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return "id: " + id +
+                ", First Name:" + firstName +
+                ", Last Name: " + lastName +
+                ", login: " + login + "\n";
     }
 
     @Override
@@ -71,7 +80,6 @@ public class User {
         if (!login.equals(user.login)) return false;
         return password.equals(user.password);
     }
-
 
     @Override
     public int hashCode() {

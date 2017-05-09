@@ -50,7 +50,7 @@ public class TestMain {
 
     private void drawMenu() {
         System.out.println("+-----------------------------------------+");
-        System.out.println("|Создать файлы с тестовыми  данными ?                  |");
+        System.out.println("|Создать файлы с тестовыми  данными ?     |");
         System.out.println("+-----------------------------------------+");
         System.out.println("|" + ITEM_1 + ". Да                                    |");
         System.out.println("|" + ITEM_2 + ". Нет                                   |");

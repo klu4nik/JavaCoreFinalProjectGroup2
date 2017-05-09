@@ -11,12 +11,24 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * Created by MYKOLA.GOROKHOV on 02.05.2017.
+ * @version final :)
+ *          Implementation of DAO Interface for working with Booking DB.
+ *          DB stored in txt file (location of the file is described by constant "PATH")
+ * @see DAO
+ * @see DAO_Users_Impl_TXT
+ * @see DAO_Hotels_Impl_TXT
  */
 public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
     final static String PATH = "./ext/DB/Booking";
     final static char SEPARATOR = (char) 29;
 
+    /**
+     * Used for read DB from the file.
+     *
+     * @return HashMap<UserID, User>
+     * @throws IOException
+     * @see DAO#get()
+     */
     @Override
     public HashMap<Integer, Booking> get() throws IOException, ClassNotFoundException {
 
@@ -54,6 +66,12 @@ public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
         return result;
     }
 
+    /**
+     * Used for writing DB to the file.
+     *
+     * @@param hashMapUsers
+     * @see DAO#set(Object)
+     */
     @Override
     public void set(HashMap<Integer, Booking> hashMapBooking) throws IOException {
         File bookingFile = new File(PATH);

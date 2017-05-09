@@ -13,12 +13,22 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Created by MYKOLA.GOROKHOV on 22.04.2017.
+ * @version final :)
+ *          Implementation of DAO Interface for working with Users DB.
+ *          DB stored in txt file (location of the file is described by constant "PATH")
+ * @see DAO
  */
 public class DAO_Users_Impl_TXT implements DAO<HashMap<Integer, User>> {
     final static String PATH = "./ext/DB/Users";
     final static char SEPARATOR = (char) 29;
 
+    /**
+     * Used for read DB from the file.
+     *
+     * @return HashMap<UserID, User>
+     * @throws IOException
+     * @see DAO#get()
+     */
     @Override
     public HashMap<Integer, User> get() throws IOException {
 //        Читаем файл построчно
@@ -39,19 +49,24 @@ public class DAO_Users_Impl_TXT implements DAO<HashMap<Integer, User>> {
         return result;
     }
 
-
+    /**
+     * Used for writing DB to the file.
+     *
+     * @@param hashMapUsers
+     * @see DAO#set(Object)
+     */
     @Override
     public void set(HashMap<Integer, User> hashMapUsers) {
         File usersFile = new File(PATH);
 
         try (FileWriter writer = new FileWriter(usersFile)) {
-            for (HashMap.Entry<Integer, User> currentEntery : hashMapUsers.entrySet()) {
+            for (HashMap.Entry<Integer, User> currentEntry : hashMapUsers.entrySet()) {
                 writer.write(
-                        currentEntery.getValue().getId().toString() + SEPARATOR +
-                                currentEntery.getValue().getLogin() + SEPARATOR +
-                                currentEntery.getValue().getFirstName() + SEPARATOR +
-                                currentEntery.getValue().getLastName() + SEPARATOR +
-                                currentEntery.getValue().getPassword()
+                        currentEntry.getValue().getId().toString() + SEPARATOR +
+                                currentEntry.getValue().getLogin() + SEPARATOR +
+                                currentEntry.getValue().getFirstName() + SEPARATOR +
+                                currentEntry.getValue().getLastName() + SEPARATOR +
+                                currentEntry.getValue().getPassword()
                                 + (char) 13 + (char) 10 // Конец строки
                 );
             }

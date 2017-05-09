@@ -1,8 +1,15 @@
 package Entity;
 
 /**
- * Created by MYKOLA.GOROKHOV on 21.04.2017.
+ * @version final :)
+ *          <p>
+ *          Entity-Class. Describes the entity of HOTEL.
+ *          Have next fields:
+ *          id - for identification entry in DB;
+ *          hotelName - Name of hotel;
+ *          city - City where the hotel is located;
  */
+
 public class Hotel {
     private Integer id;
     private String hotelName;
@@ -16,11 +23,9 @@ public class Hotel {
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "id=" + id +
-                ", hotelName='" + hotelName + '\'' +
-                ", city='" + city + '\'' +
-                '}' + "\n";
+        return "id=" + id +
+                ", Name: " + hotelName +
+                ", City: " + city + "\n";
     }
 
     public Integer getId() {

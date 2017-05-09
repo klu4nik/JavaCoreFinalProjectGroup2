@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by Savchuk Andrey on 05/05/2017.
  */
-public class API_Impl {
+public class API {
     BookingController bookingController = new BookingController();
     HotelsController hotelsController = new HotelsController();
     UserController userController = new UserController();
@@ -73,7 +73,6 @@ public class API_Impl {
      * @return
      */
     public List<Room> findFreeRoomsForDatesForPersonNumber(Integer hotelID, Integer numberOfPersons, Date startDate, Date endDate) {
-        //List<Room> foundRooms = roomsController.findRoomByHotel(hotelsController.findHotelById(hotelID).get(0));
         //Формируем  выборку комнат подходящих в заданном отеле
         try {
             List<Room> foundRooms = roomsController.getRoomsByHotelAndNumberOfPersons(hotelID, numberOfPersons);

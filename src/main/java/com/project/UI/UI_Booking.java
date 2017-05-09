@@ -1,6 +1,6 @@
 package UI;
 
-import API.API_Impl;
+import API.API;
 import Entity.Booking;
 import Entity.Hotel;
 import Entity.Room;
@@ -22,7 +22,7 @@ public class UI_Booking {
     private final static String ITEM_5 = "5";
     private final static String EXIT = "q";
 
-    API_Impl apiImpl = new API_Impl();
+    API api = new API();
 
 
     public void run() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
@@ -64,7 +64,7 @@ public class UI_Booking {
                     break;
                 case EXIT:
                     System.out.println("Exiting . . .");
-                    apiImpl.flushBooking();
+                    api.flushBooking();
                     break;
                 default:
                     break;
@@ -82,7 +82,7 @@ public class UI_Booking {
         System.out.println("+-----------------------------------------+\n");
         Integer hotelId = getHotelIDByName();
 
-        apiImpl.printBooks(apiImpl.findBooksByHotel(hotelId));
+        api.printBooks(api.findBooksByHotel(hotelId));
 
 
         Scanner scanner = new Scanner(System.in);
@@ -98,7 +98,7 @@ public class UI_Booking {
         System.out.println("|          FIND BOOKING BY Login          |");
         System.out.println("+-----------------------------------------+\n");
         String login = inputLogin();
-        apiImpl.printBooks(apiImpl.findBookingByLogin(login));
+        api.printBooks(api.findBookingByLogin(login));
         System.out.println();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Нажмите Enter ...");
@@ -116,7 +116,7 @@ public class UI_Booking {
 
         Scanner scanner = new Scanner(System.in);
         String login = inputLogin();
-        List<Booking> foundBooks = apiImpl.findBookingByLogin(login);
+        List<Booking> foundBooks = api.findBookingByLogin(login);
 
         if (foundBooks != null) {
             System.out.println("Выберите бронирование:");
@@ -132,9 +132,9 @@ public class UI_Booking {
                     Integer choiceInt = Integer.parseInt(choice);
                     if (choiceInt <= foundBooks.size() && choiceInt >= 0) {
                         state = true;
-                        System.out.println("Бронь " + apiImpl.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
-                        apiImpl.removeBook(foundBooks.get(Integer.parseInt(choice)));
-                        apiImpl.flushBooking();
+                        System.out.println("Бронь " + api.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
+                        api.removeBook(foundBooks.get(Integer.parseInt(choice)));
+                        api.flushBooking();
                         new UI_Booking().AddBookingMenu();
 
                     } else System.out.println("Введите корректный номер в списке");
@@ -158,7 +158,7 @@ public class UI_Booking {
 
         Scanner scanner = new Scanner(System.in);
         String login = inputLogin();
-        List<Booking> foundBooks = apiImpl.findBookingByLogin(login);
+        List<Booking> foundBooks = api.findBookingByLogin(login);
 
         if (foundBooks != null) {
             System.out.println("Выберите бронирование:");
@@ -174,9 +174,9 @@ public class UI_Booking {
                     Integer choiceInt = Integer.parseInt(choice);
                     if (choiceInt <= foundBooks.size() && choiceInt >= 0) {
                         state = true;
-                        System.out.println("Бронь " + apiImpl.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
-                        apiImpl.removeBook(foundBooks.get(Integer.parseInt(choice)));
-                        apiImpl.flushBooking();
+                        System.out.println("Бронь " + api.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
+                        api.removeBook(foundBooks.get(Integer.parseInt(choice)));
+                        api.flushBooking();
 
                     } else System.out.println("Введите корректный номер в списке");
                 } catch (Exception e) {
@@ -208,20 +208,20 @@ public class UI_Booking {
         Date[] datesBooking = new Date[2];
 
 
-        if (apiImpl.isAllDBPresented()) {
+        if (api.isAllDBPresented()) {
             login = inputLogin();
-            user_id = apiImpl.findUserByLogin(login).getId();
+            user_id = api.findUserByLogin(login).getId();
             hotelID = getHotelIDByName();
             datesBooking = setStartEndDate();
             numberOfPersons = getNumberOfPersons();
             room_Number =
-                    chooseRoomNumber(apiImpl.findFreeRoomsForDatesForPersonNumber(hotelID, numberOfPersons, datesBooking[0], datesBooking[1]));
+                    chooseRoomNumber(api.findFreeRoomsForDatesForPersonNumber(hotelID, numberOfPersons, datesBooking[0], datesBooking[1]));
             if (room_Number != -1) {
                 Booking newBook = new Booking(user_id, room_Number, hotelID, datesBooking[0], datesBooking[1]);
-                if (apiImpl.findBook(newBook).equals(0)) {
+                if (api.findBook(newBook).equals(0)) {
                     System.out.println("Бронирование добавлено");
-                    apiImpl.addBook(newBook);
-                    apiImpl.flushBooking();
+                    api.addBook(newBook);
+                    api.flushBooking();
                     System.out.println();
                     System.out.println("Нажмите Enter ...");
                     scanner.nextLine();
@@ -291,7 +291,7 @@ public class UI_Booking {
         do {
             System.out.println("Введите логин пользователя: ");
             login = scanner.nextLine();
-            if (apiImpl.checkLoginIsPresented(login) != null) {
+            if (api.checkLoginIsPresented(login) != null) {
                 state = true;
             } else {
                 state = false;
@@ -308,7 +308,7 @@ public class UI_Booking {
         do {
             System.out.println("Введите название отеля: ");
             hotel = scanner.nextLine();
-            if (!hotel.equals("") && apiImpl.findHotelByName(hotel).size() != 0) {
+            if (!hotel.equals("") && api.findHotelByName(hotel).size() != 0) {
                 state = true;
             } else {
                 state = false;
@@ -316,7 +316,7 @@ public class UI_Booking {
             }
         } while (!state);
 
-        List<Hotel> foundHotels = apiImpl.findHotelByName(hotel);
+        List<Hotel> foundHotels = api.findHotelByName(hotel);
 
         int numberOFHotelsWithName = foundHotels.size();
         if (numberOFHotelsWithName > 1) {
@@ -405,7 +405,7 @@ public class UI_Booking {
             System.out.println("Введите  дату заезда в формате MM/dd/yyyy");
 
             date = scanner.nextLine();
-            if (apiImpl.convertStringToDate(date) == null) {
+            if (api.convertStringToDate(date) == null) {
                 drawAskMenu("Дата введена некоректно:");
             } else {
                 state = true;
@@ -414,7 +414,7 @@ public class UI_Booking {
 
         } while (!state);
 
-        startDateBooking = apiImpl.convertStringToDate(date);
+        startDateBooking = api.convertStringToDate(date);
 
         state = false;
         state1 = false;
@@ -423,13 +423,13 @@ public class UI_Booking {
             System.out.println("Введите  дату выезда в формате MM/dd/yyyy");
 
             date = scanner.nextLine();
-            if (apiImpl.convertStringToDate(date) == null || apiImpl.convertStringToDate(date).before(startDateBooking)) {
+            if (api.convertStringToDate(date) == null || api.convertStringToDate(date).before(startDateBooking)) {
                 drawAskMenu("Дата введена некоректно:");
             } else {
                 state = true;
             }
         } while (!state);
-        endDateBooking = apiImpl.convertStringToDate(date);
+        endDateBooking = api.convertStringToDate(date);
         Date[] datesBooking = {startDateBooking, endDateBooking};
         return datesBooking;
     }

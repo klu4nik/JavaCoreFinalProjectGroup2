@@ -104,10 +104,10 @@ public class UI_Rooms {
                             newNumberOfPersonInteger = Integer.parseInt(newNumberOfPerson);
                         } catch (NumberFormatException e) {
                             System.out.println("Недопустимое значение...");
-                            newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getNumberOfperson();
+                            newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getNumberOfPerson();
                         }
                     } else {
-                        newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getNumberOfperson();
+                        newNumberOfPersonInteger = roomsController.getRoomByHotelAndRoomNumber(hotelForRoom, roomNumberInteger).getNumberOfPerson();
                     }
                     System.out.println("Колличество мест : " + newNumberOfPersonInteger);
 

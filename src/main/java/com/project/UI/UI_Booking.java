@@ -44,9 +44,9 @@ public class UI_Booking {
                     break;
                 case ITEM_2:
                     cls();
-                    /*editBookingMenu();
-                    System.out.println("Нажмите Enter ...");
-                    scanner.nextLine();*/
+//                    editBookingMenu();
+//                    System.out.println("Нажмите Enter ...");
+//                    scanner.nextLine();
                     break;
                 case ITEM_3:
                     cls();

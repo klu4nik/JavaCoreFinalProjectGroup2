@@ -47,12 +47,6 @@ public final class Filegenerator {
 
         dri.set(roo);
         dhi.set(hot);
-        DAO_Users_Impl_TXT dui_TXT = new DAO_Users_Impl_TXT();
-        DAO_Hotels_Impl_TXT dhi_TXT = new DAO_Hotels_Impl_TXT();
-        DAO_Rooms_Impl_TXT dri_TXT = new DAO_Rooms_Impl_TXT();
 
-        dui_TXT.set(dui.get());
-        dhi_TXT.set(dhi.get());
-        dri_TXT.set(dri.get());
     }
 }

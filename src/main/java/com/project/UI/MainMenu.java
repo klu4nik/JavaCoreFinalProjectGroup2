@@ -38,10 +38,12 @@ public class MainMenu {
                     new UI_Booking().run();
                     break;
                 case EXIT:
+                    cls();
                     System.out.println("Exiting . . .");
 
                     break;
                 default:
+                    cls();
                     break;
             }
 

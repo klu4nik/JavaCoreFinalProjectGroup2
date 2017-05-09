@@ -12,7 +12,6 @@ public class TestMain {
     private final static String ITEM_1 = "1";
     private final static String ITEM_2 = "2";
 
-
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, ClassNotFoundException {
 
 
@@ -26,26 +25,26 @@ public class TestMain {
     public void run() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         String choice;
         do {
+
             drawMenu();
             //-----------------
             Scanner scanner = new Scanner(System.in);
-            choice = String.valueOf(scanner.next().toLowerCase());
+            choice = String.valueOf(scanner.next().toLowerCase().charAt(0));
             //-----------------
 
 
             switch (choice) {
                 case ITEM_1:
                     Filegenerator.fileGenerator();
-                    new MainMenu().run();
                     break;
                 case ITEM_2:
-                    new MainMenu().run();
                     break;
                 default:
                     break;
             }
-        } while (choice.equals(ITEM_1) || choice.equals(ITEM_2));
 
+        } while (!choice.equals(ITEM_1) && !choice.equals(ITEM_2));
+        new MainMenu().run();
     }
 
     private void drawMenu() {
@@ -54,7 +53,6 @@ public class TestMain {
         System.out.println("+-----------------------------------------+");
         System.out.println("|" + ITEM_1 + ". Да                                    |");
         System.out.println("|" + ITEM_2 + ". Нет                                   |");
-
         System.out.println("+-----------------------------------------+");
     }
 }

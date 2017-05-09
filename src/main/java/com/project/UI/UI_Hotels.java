@@ -1,4 +1,4 @@
-package API;
+package UI;
 
 import Controller.HotelsController;
 import Entity.Hotel;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Created by MYKOLA.GOROKHOV on 29.04.2017.
  */
-public class API_Hotels {
+public class UI_Hotels {
     private final static String ITEM_1 = "1";
     private final static String ITEM_2 = "2";
     private final static String ITEM_3 = "3";

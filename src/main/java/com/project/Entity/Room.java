@@ -1,24 +1,28 @@
 package Entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
- * Created by MYKOLA.GOROKHOV on 21.04.2017.
+ * @version final :)
+ *          Entity-Class. Describes the entity of ROOM.
+ *          Have next fields:
+ *          hotel - Hotel where the Room is located;
+ * @see Hotel
+ * roomNumber - unique Number of room in Hotel ;
+ * numberOfPerson - quantity of bed;
+ * price - Value of price per day;
  */
-public class Room implements Serializable {
+
+public class Room {
     private Integer roomNumber;
     private Hotel hotel;
-    private Integer numberOfperson;
+    private Integer numberOfPerson;
     private Integer price;
 
     public Room(Hotel hotel, Integer roomNumber, Integer numberOfPerson, Integer price) {
         this.hotel = hotel;
-        this.numberOfperson = numberOfPerson;
+        this.numberOfPerson = numberOfPerson;
         this.price = price;
         this.roomNumber = roomNumber;
     }
-
 
     public Integer getRoomNumber() {
         return roomNumber;
@@ -28,8 +32,8 @@ public class Room implements Serializable {
         return hotel;
     }
 
-    public Integer getNumberOfperson() {
-        return numberOfperson;
+    public Integer getNumberOfPerson() {
+        return numberOfPerson;
     }
 
     public Integer getPrice() {
@@ -45,7 +49,7 @@ public class Room implements Serializable {
 
         if (!roomNumber.equals(room.roomNumber)) return false;
         if (!hotel.equals(room.hotel)) return false;
-        if (!numberOfperson.equals(room.numberOfperson)) return false;
+        if (!numberOfPerson.equals(room.numberOfPerson)) return false;
         return price.equals(room.price);
     }
 
@@ -53,18 +57,16 @@ public class Room implements Serializable {
     public int hashCode() {
         int result = roomNumber.hashCode();
         result = 71 * result + hotel.hashCode();
-        result = 31 * result + numberOfperson.hashCode();
+        result = 31 * result + numberOfPerson.hashCode();
         result = 59 * result + price.hashCode();
         return result;
     }
 
     @Override
     public String toString() {
-        return "Room{" +
-                "roomNumber=" + roomNumber +
-                ", hotel=" + hotel +
-                ", numberOfperson=" + numberOfperson +
-                ", price=" + price +
-                '}'+"\n";
+        return "Number: " + roomNumber +
+                ", Hotel: " + hotel.getHotelName() +
+                ", Number Of Person: " + numberOfPerson +
+                ", Price: " + price + "\n";
     }
 }

@@ -11,52 +11,80 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * Created by MYKOLA.GOROKHOV on 02.05.2017.
+ * @version final :)
+ *          Implementation of DAO Interface for working with Booking DB.
+ *          DB stored in txt file (location of the file is described by constant "PATH")
+ * @see DAO
+ * @see DAO_Users_Impl_TXT
+ * @see DAO_Hotels_Impl_TXT
  */
-public class DAO_Booking_Impl_TXT implements DAO<ArrayList<Booking>> {
-    final static String PATH = "../Booking";
+public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
+    final static String PATH = "./ext/DB/Booking";
     final static char SEPARATOR = (char) 29;
 
+    /**
+     * Used for read DB from the file.
+     *
+     * @return HashMap<UserID, User>
+     * @throws IOException
+     * @see DAO#get()
+     */
     @Override
-    public ArrayList<Booking> get() throws IOException, ClassNotFoundException {
+    public HashMap<Integer, Booking> get() throws IOException, ClassNotFoundException {
 
 //        Читаем файл построчно
         List<String> currentBooking = null;
+        try {
+            //проверяем, что если файл не существует то создаем его
+            File file = new File(PATH);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+        }
         try {
             currentBooking = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.getMessage();
         }
 //        Описываем вид результата
-        ArrayList<Booking> result = new ArrayList<Booking>();
+        HashMap<Integer, Booking> result = new HashMap<Integer, Booking>();
 //        бъем каждую cтроку на поля
         for (String str : currentBooking) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
-            String user_login = stringTokenizer.nextToken();
-            String hotel_Name = stringTokenizer.nextToken();
+            Integer id = Integer.valueOf(stringTokenizer.nextToken());
+            Integer user_id = Integer.valueOf(stringTokenizer.nextToken());
             Integer room_Number = Integer.valueOf(stringTokenizer.nextToken());
-            Integer date_start = Integer.valueOf(stringTokenizer.nextToken());
-            Integer date_end = Integer.valueOf(stringTokenizer.nextToken());
+            Integer hotel_id = Integer.valueOf(stringTokenizer.nextToken());
+            String date_start = stringTokenizer.nextToken();
+            String date_end = stringTokenizer.nextToken();
 
-            Booking nextBooking = new Booking(user_login, hotel_Name, room_Number, new Date(date_start), new Date(date_end));
+            Booking nextBooking = new Booking(id, user_id, room_Number, hotel_id, new Date(Long.parseLong(date_start)), new Date(Long.parseLong(date_end)));
 
-            result.add(nextBooking);
+            result.put(user_id, nextBooking);
         }
         return result;
     }
 
+    /**
+     * Used for writing DB to the file.
+     *
+     * @@param hashMapUsers
+     * @see DAO#set(Object)
+     */
     @Override
-    public void set(ArrayList<Booking> arrayListBooking) throws IOException {
+    public void set(HashMap<Integer, Booking> hashMapBooking) throws IOException {
         File bookingFile = new File(PATH);
 
         try (FileWriter writer = new FileWriter(bookingFile)) {
-            for (Booking currentEntery : arrayListBooking) {
+            for (HashMap.Entry<Integer, Booking> currentEntery : hashMapBooking.entrySet()) {
                 writer.write(
-                        currentEntery.getUser_login() + SEPARATOR +
-                                currentEntery.getHotel_Name() + SEPARATOR +
-                                currentEntery.getRoom_Number().toString() + SEPARATOR +
-                                currentEntery.getDate_start().getTime() + SEPARATOR +
-                                currentEntery.getDate_end().getTime());
+                        currentEntery.getValue().getId().toString() + SEPARATOR +
+                                currentEntery.getValue().getUser_id().toString() + SEPARATOR +
+                                currentEntery.getValue().getRoom_Number().toString() + SEPARATOR +
+                                currentEntery.getValue().getHotel_id().toString() + SEPARATOR +
+                                currentEntery.getValue().getDate_start().getTime() + SEPARATOR +
+                                currentEntery.getValue().getDate_end().getTime());
                 writer.write(new StringBuilder().append((char) 13).append((char) 10).toString()); // Конец строки
             }
         } catch (Exception e) {

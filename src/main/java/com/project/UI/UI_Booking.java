@@ -263,6 +263,10 @@ public class UI_Booking {
         }
     }
 
+    /**
+     *
+    Method prints menu which asks you  do you want to retry  or  no
+     */
     private boolean drawAskMenu(String message) {
         cls();
         Scanner scanner = new Scanner(System.in);
@@ -282,6 +286,10 @@ public class UI_Booking {
     }
 
 
+    /**
+     * Method recognize Login and check him to correctness
+     * @return
+     */
     private String inputLogin() {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
@@ -299,6 +307,11 @@ public class UI_Booking {
         return login;
     }
 
+    /**
+     * Method recognize Hotel name and check him to correctness.
+     * Also it filter  hotel with the same name and returns the  correct hotel id
+     * @return
+     */
     private Integer getHotelIDByName() {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
@@ -344,6 +357,12 @@ public class UI_Booking {
     }
 
 
+    /**
+     * Method print list of getted Rooms
+     * and return id of the chosen room
+     * @param foundRooms
+     * @return
+     */
     private Integer chooseRoomNumber(List<Room> foundRooms) {
         Scanner scanner = new Scanner(System.in);
         boolean state = false;
@@ -373,6 +392,9 @@ public class UI_Booking {
         return -1;
     }
 
+    /*
+    Method get number  of the persons from keyboard
+     */
     public Integer getNumberOfPersons() {
         System.out.println("Введите количество гостей:");
         Scanner scanner = new Scanner(System.in);
@@ -390,6 +412,10 @@ public class UI_Booking {
         return -1;
     }
 
+    /**
+     * Method  gets dates form keyboard  and  returnthem in Date format
+     * @return
+     */
     public Date[] setStartEndDate() {
         Date startDateBooking;
         Date endDateBooking;

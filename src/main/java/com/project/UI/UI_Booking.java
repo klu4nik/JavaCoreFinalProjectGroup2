@@ -264,15 +264,14 @@ public class UI_Booking {
     }
 
     /**
-     *
-    Method prints menu which asks you  do you want to retry  or  no
+     * Method prints menu which asks you  do you want to retry  or  no
      */
     private boolean drawAskMenu(String message) {
         cls();
         Scanner scanner = new Scanner(System.in);
         System.out.println(message);
-        System.out.println( ITEM_1 + ". Повторить попытку");
-        System.out.println( EXIT + ". В главное меню");
+        System.out.println(ITEM_1 + ". Повторить попытку");
+        System.out.println(EXIT + ". В главное меню");
         String choice = String.valueOf(scanner.nextLine().toLowerCase());
         switch (choice) {
             case ITEM_1:
@@ -288,6 +287,7 @@ public class UI_Booking {
 
     /**
      * Method recognize Login and check him to correctness
+     *
      * @return
      */
     private String inputLogin() {
@@ -310,6 +310,7 @@ public class UI_Booking {
     /**
      * Method recognize Hotel name and check him to correctness.
      * Also it filter  hotel with the same name and returns the  correct hotel id
+     *
      * @return
      */
     private Integer getHotelIDByName() {
@@ -360,6 +361,7 @@ public class UI_Booking {
     /**
      * Method print list of getted Rooms
      * and return id of the chosen room
+     *
      * @param foundRooms
      * @return
      */
@@ -414,6 +416,7 @@ public class UI_Booking {
 
     /**
      * Method  gets dates form keyboard  and  returnthem in Date format
+     *
      * @return
      */
     public Date[] setStartEndDate() {

@@ -1,17 +1,27 @@
 package DAO;
 
-import Entity.Booking;
-
 import java.io.IOException;
-import java.util.ArrayList;
-
 
 /**
- * Created by MYKOLA.GOROKHOV on 26.04.2017.
+ * @version final :)
+ *          Generic Interface. Used for working with DBs.
  */
-public interface DAO <T>{
-    public T get() throws IOException, ClassNotFoundException;
 
-    public void set(T t) throws IOException;
+public interface DAO<T> {
+    /**
+     * Used for read from DB
+     *
+     * @return Generic <T>
+     * @throws IOException, ClassNotFoundException
+     */
+    T get() throws IOException, ClassNotFoundException;
+
+    /**
+     * Used for write to DB
+     *
+     * @param t Generic <T>
+     * @throws IOException
+     */
+    void set(T t) throws IOException;
 
 }

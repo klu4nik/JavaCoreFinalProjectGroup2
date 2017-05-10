@@ -3,19 +3,42 @@ package Entity;
 import java.util.Date;
 
 /**
- * Created by Klu4nik on 02/05/2017.
+ * @version final :)
+ *          Entity-Class. Describes the entity of Booking.
+ *          Have next fields:
+ *          id - for identification entry in DB;
+ *          user_id - for identification user in DB;
+ *          hotel_id - for identification Hotel in DB ;
+ *          room_Number - for identification Room in Hotel;
+ *          date_start - data of booking start;
+ *          date_end- data of booking finish;
+ * @see User
+ * @see Hotel
  */
 public class Booking {
+    private Integer id;
     private Integer user_id;
     private Integer room_Number;
+    private Integer hotel_id;
     private Date date_start;
     private Date date_end;
 
-    public Booking(Integer user_id, Integer room_Number, Date date_start, Date date_end) {
+    public Booking(Integer user_id, Integer room_Number, Integer hotel_id, Date date_start, Date date_end) {
         this.user_id = user_id;
         this.room_Number = room_Number;
+        this.hotel_id = hotel_id;
         this.date_start = date_start;
         this.date_end = date_end;
+        this.id = this.hashCode();
+    }
+
+    public Booking(Integer id, Integer user_id, Integer room_Number, Integer hotel_id, Date date_start, Date date_end) {
+        this.user_id = user_id;
+        this.room_Number = room_Number;
+        this.hotel_id = hotel_id;
+        this.date_start = date_start;
+        this.date_end = date_end;
+        this.id = id;
     }
 
     @Override
@@ -42,12 +65,11 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking{" +
-                "user_id=" + user_id +
-                ", room_Number=" + room_Number +
-                ", date_start=" + date_start +
-                ", date_end=" + date_end +
-                '}';
+        return "User ID: " + user_id +
+                ", Room Number: " + room_Number +
+                ", Date of start:" + date_start +
+                ", Date of Finish: " + date_end +
+                "\n";
     }
 
     public Integer getUser_id() {
@@ -64,5 +86,13 @@ public class Booking {
 
     public Date getDate_end() {
         return date_end;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getHotel_id() {
+        return hotel_id;
     }
 }

@@ -26,7 +26,7 @@ public final class PasswordHashGenerator {
      * @throws NoSuchAlgorithmException
      * @see PasswordHashGenerator
      */
-    public static final String generate(String password) throws NoSuchAlgorithmException {
+    public static String generate(String password) throws NoSuchAlgorithmException {
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         byte[] passBytes = password.getBytes();
         byte[] passHash = sha256.digest(passBytes);

@@ -35,7 +35,7 @@ public class DAOUsersImpl implements DAO<HashMap<Integer, User>> {
         List<String> currentUsers = null;
         currentUsers = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
 //        Описываем вид результата
-        HashMap<Integer, User> result = new HashMap<Integer, User>();
+        HashMap<Integer, User> result = new HashMap<>();
 //        бъем каждую cтроку на поля
         for (String str : currentUsers) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
@@ -52,7 +52,7 @@ public class DAOUsersImpl implements DAO<HashMap<Integer, User>> {
     /**
      * Used for writing DB to the file.
      *
-     * @@param hashMapUsers
+     * @param hashMapUsers
      * @see DAO#set(Object)
      */
     @Override

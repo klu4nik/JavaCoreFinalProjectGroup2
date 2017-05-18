@@ -41,6 +41,7 @@ public class DAOBookingImpl implements DAO<HashMap<Integer, Booking>> {
                 file.createNewFile();
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         try {
             currentBooking = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
@@ -48,7 +49,7 @@ public class DAOBookingImpl implements DAO<HashMap<Integer, Booking>> {
             e.getMessage();
         }
 //        Описываем вид результата
-        HashMap<Integer, Booking> result = new HashMap<Integer, Booking>();
+        HashMap<Integer, Booking> result = new HashMap<>();
 //        бъем каждую cтроку на поля
         for (String str : currentBooking) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
@@ -77,14 +78,14 @@ public class DAOBookingImpl implements DAO<HashMap<Integer, Booking>> {
         File bookingFile = new File(PATH);
 
         try (FileWriter writer = new FileWriter(bookingFile)) {
-            for (HashMap.Entry<Integer, Booking> currentEntery : hashMapBooking.entrySet()) {
+            for (HashMap.Entry<Integer, Booking> currentEntry : hashMapBooking.entrySet()) {
                 writer.write(
-                        currentEntery.getValue().getId().toString() + SEPARATOR +
-                                currentEntery.getValue().getUser_id().toString() + SEPARATOR +
-                                currentEntery.getValue().getRoom_Number().toString() + SEPARATOR +
-                                currentEntery.getValue().getHotel_id().toString() + SEPARATOR +
-                                currentEntery.getValue().getDate_start().getTime() + SEPARATOR +
-                                currentEntery.getValue().getDate_end().getTime());
+                        currentEntry.getValue().getId().toString() + SEPARATOR +
+                                currentEntry.getValue().getUser_id().toString() + SEPARATOR +
+                                currentEntry.getValue().getRoom_Number().toString() + SEPARATOR +
+                                currentEntry.getValue().getHotel_id().toString() + SEPARATOR +
+                                currentEntry.getValue().getDate_start().getTime() + SEPARATOR +
+                                currentEntry.getValue().getDate_end().getTime());
                 writer.write(new StringBuilder().append((char) 13).append((char) 10).toString()); // Конец строки
             }
         } catch (Exception e) {

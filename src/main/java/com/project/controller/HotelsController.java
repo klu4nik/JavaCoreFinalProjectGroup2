@@ -98,9 +98,7 @@ public class HotelsController {
      * @return List of Hotels with specified name
      */
     public List<Hotel> findHotelByName(String hotelName) {
-        List<Hotel> hotelNames =
-                hotels.values().stream().filter(p -> p.getHotelName().equals(hotelName)).collect(Collectors.toList());
-        return hotelNames;
+        return hotels.values().stream().filter(p -> p.getHotelName().equals(hotelName)).collect(Collectors.toList());
     }
 
     /**
@@ -110,9 +108,7 @@ public class HotelsController {
      * @return List of Hotels in specified city
      */
     public List<Hotel> findHotelByCity(String hotelCity) {
-        List<Hotel> hotelNames =
-                hotels.values().stream().filter(p -> p.getCity().equals(hotelCity)).collect(Collectors.toList());
-        return hotelNames;
+        return hotels.values().stream().filter(p -> p.getCity().equals(hotelCity)).collect(Collectors.toList());
     }
 
     /**
@@ -122,9 +118,7 @@ public class HotelsController {
      * @return List of Hotels with specified id
      */
     public List<Hotel> findHotelById(Integer hotel_id) {
-        List<Hotel> hotel =
-                hotels.values().stream().filter(p -> p.getId().equals(hotel_id)).collect(Collectors.toList());
-        return hotel;
+        return hotels.values().stream().filter(p -> p.getId().equals(hotel_id)).collect(Collectors.toList());
 
     }
 

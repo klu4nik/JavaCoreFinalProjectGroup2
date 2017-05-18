@@ -40,6 +40,7 @@ public class DAOHotelsImpl implements DAO<HashMap<Integer, Hotel>> {
                 file.createNewFile();
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         try {
             currentHotel = Files.readAllLines(Paths.get(PATH), StandardCharsets.UTF_8);
@@ -47,7 +48,7 @@ public class DAOHotelsImpl implements DAO<HashMap<Integer, Hotel>> {
             System.out.println("Impossible to read the file: " + PATH);
         }
 //        Описываем вид результата
-        HashMap<Integer, Hotel> result = new HashMap<Integer, Hotel>();
+        HashMap<Integer, Hotel> result = new HashMap<>();
 //        бъем каждую cтроку на поля
         for (String str : currentHotel) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
@@ -62,7 +63,7 @@ public class DAOHotelsImpl implements DAO<HashMap<Integer, Hotel>> {
     /**
      * Used for writing DB to the file.
      *
-     * @@param hashMapHotels
+     * @param hashMapHotels
      * @see DAO#set(Object)
      */
     @Override
@@ -70,10 +71,10 @@ public class DAOHotelsImpl implements DAO<HashMap<Integer, Hotel>> {
         File hotelsFile = new File(PATH);
 
         try (FileWriter writer = new FileWriter(hotelsFile)) {
-            for (HashMap.Entry<Integer, Hotel> currentEntery : hashMapHotels.entrySet()) {
+            for (HashMap.Entry<Integer, Hotel> currentEntry : hashMapHotels.entrySet()) {
                 writer.write(
-                        currentEntery.getValue().getHotelName() + SEPARATOR +
-                                currentEntery.getValue().getCity()
+                        currentEntry.getValue().getHotelName() + SEPARATOR +
+                                currentEntry.getValue().getCity()
                                 + (char) 13 + (char) 10 // Конец строки
                 );
             }

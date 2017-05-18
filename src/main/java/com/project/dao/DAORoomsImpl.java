@@ -35,16 +35,15 @@ public class DAORoomsImpl implements DAO<HashMap<Integer, Room>> {
     @Override
     public HashMap<Integer, Room> get() throws IOException {
 //        читаем список отелей
-        HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
+        HashMap<Integer, Hotel> hotelsFromFile = new HashMap<>();
         try {
             hotelsFromFile = new DAOHotelsImpl().get();
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);
         }
 //        читаем список Пользователей
-        HashMap<Integer, User> usersFromFile = new HashMap<Integer, User>();
         try {
-            usersFromFile = new DAOUsersImpl().get();
+            HashMap<Integer, User> usersFromFile = new DAOUsersImpl().get();
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);
         }
@@ -56,7 +55,7 @@ public class DAORoomsImpl implements DAO<HashMap<Integer, Room>> {
             e.getMessage();
         }
 //        Описываем вид результата
-        HashMap<Integer, Room> result = new HashMap<Integer, Room>();
+        HashMap<Integer, Room> result = new HashMap<>();
 //        бъем каждую cтроку на поля
         for (String str : currentRoom) {
             StringTokenizer stringTokenizer = new StringTokenizer(str, SEPARATOR + "");
@@ -76,7 +75,7 @@ public class DAORoomsImpl implements DAO<HashMap<Integer, Room>> {
     /**
      * Used for writing DB to the file.
      *
-     * @@param hashMapRooms
+     * @param hashMapRooms
      * @see DAO#set(Object)
      */
     @Override
@@ -89,15 +88,16 @@ public class DAORoomsImpl implements DAO<HashMap<Integer, Room>> {
                 file.createNewFile();
             }
         } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
 
         try (FileWriter writer = new FileWriter(roomsFile)) {
-            for (HashMap.Entry<Integer, Room> currentEntery : hashMapRooms.entrySet()) {
+            for (HashMap.Entry<Integer, Room> currentEntry : hashMapRooms.entrySet()) {
                 writer.write(
-                        currentEntery.getValue().getHotel().getId().toString() + SEPARATOR +
-                                currentEntery.getValue().getRoomNumber().toString() + SEPARATOR +
-                                currentEntery.getValue().getNumberOfPerson().toString() + SEPARATOR +
-                                currentEntery.getValue().getPrice().toString());
+                        currentEntry.getValue().getHotel().getId().toString() + SEPARATOR +
+                                currentEntry.getValue().getRoomNumber().toString() + SEPARATOR +
+                                currentEntry.getValue().getNumberOfPerson().toString() + SEPARATOR +
+                                currentEntry.getValue().getPrice().toString());
 
                 writer.write(new StringBuilder().append((char) 13).append((char) 10).toString()); // Конец строки
 

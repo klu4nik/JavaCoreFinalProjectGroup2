@@ -6,6 +6,7 @@ import entity.Room;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -61,9 +62,7 @@ public class RoomsController extends HotelsController {
      */
     public List<Room> findRoomByHotel(Hotel hotelForRoom) {
         try {
-            List<Room> result =
-                    rooms.values().stream().filter(p -> p.getHotel().equals(hotelForRoom)).collect(Collectors.toList());
-            return result;
+            return rooms.values().stream().filter(p -> p.getHotel().equals(hotelForRoom)).collect(Collectors.toList());
         } catch (Exception e) {
             return null;
         }
@@ -88,7 +87,7 @@ public class RoomsController extends HotelsController {
      * @return updated DB
      */
     public HashMap<Integer, Room> deleteRoomByHotelAndNumber(Hotel hotel, Integer roomNumber) {
-        rooms.values().removeIf(p -> p.getHotel().equals(hotel) && p.getRoomNumber() == roomNumber);
+        rooms.values().removeIf(p -> p.getHotel().equals(hotel) && Objects.equals(p.getRoomNumber(), roomNumber));
         return rooms;
     }
 
@@ -101,10 +100,7 @@ public class RoomsController extends HotelsController {
      */
     public boolean RoomInHotelExist(Hotel hotel, Integer roomNumber) {
 
-        if (rooms.values().stream().filter(p -> p.getHotel().equals(hotel) && p.getRoomNumber().equals(roomNumber)).count() != 0) {
-            return true;
-        }
-        return false;
+        return rooms.values().stream().filter(p -> p.getHotel().equals(hotel) && p.getRoomNumber().equals(roomNumber)).count() != 0;
     }
 
     /**

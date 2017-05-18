@@ -87,9 +87,7 @@ public class BookingController {
      * @return List of Booking with specified User
      */
     public List<Booking> findBookingByUserID(Integer userID) {
-        List<Booking> books =
-                booking.values().stream().filter(p -> p.getUser_id().equals(userID)).collect(Collectors.toList());
-        return books;
+        return booking.values().stream().filter(p -> p.getUser_id().equals(userID)).collect(Collectors.toList());
     }
 
     /**
@@ -100,9 +98,7 @@ public class BookingController {
      */
     public List<Booking> findBooksByHotel(Integer hotelID) {
 
-        List<Booking> books =
-                booking.values().stream().filter(p -> p.getHotel_id().equals(hotelID)).collect(Collectors.toList());
-        return books;
+        return booking.values().stream().filter(p -> p.getHotel_id().equals(hotelID)).collect(Collectors.toList());
     }
 
     /**
@@ -113,9 +109,7 @@ public class BookingController {
      * @return List of Booking with specified parameters
      */
     public List<Booking> findBookingByRoomInHotel(Integer roomNumber, Integer hotelID) {
-        List<Booking> books =
-                booking.values().stream().filter(p -> p.getHotel_id().equals(hotelID) && p.getRoom_Number().equals(roomNumber)).collect(Collectors.toList());
-        return books;
+        return booking.values().stream().filter(p -> p.getHotel_id().equals(hotelID) && p.getRoom_Number().equals(roomNumber)).collect(Collectors.toList());
     }
 
     /**
@@ -129,6 +123,4 @@ public class BookingController {
         addBook(newBooking);
         return booking;
     }
-
-
 }

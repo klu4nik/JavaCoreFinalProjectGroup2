@@ -415,7 +415,7 @@ public class UIBooking {
     }
 
     /**
-     * Method  gets dates form keyboard  and  returnthem in Date format
+     * Method  gets dates form keyboard  and  return them in Date format
      *
      * @return
      */
@@ -457,8 +457,7 @@ public class UIBooking {
             }
         } while (!state);
         endDateBooking = api.convertStringToDate(date);
-        Date[] datesBooking = {startDateBooking, endDateBooking};
-        return datesBooking;
+        return new Date[]{startDateBooking, endDateBooking};
     }
 }
 

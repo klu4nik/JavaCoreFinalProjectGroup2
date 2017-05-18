@@ -64,7 +64,7 @@ public class API {
 
 
     /**
-     * Methos search fre rooms in hotel for sended number of persons and for sended dates
+     * Method search fre rooms in hotel for sanded number of persons and for sanded dates
      *
      * @param hotelID
      * @param numberOfPersons
@@ -132,7 +132,7 @@ public class API {
     }
 
     /**
-     * method retirns  list of books founded in sended hotel
+     * method returns  list of books founded in sanded hotel
      *
      * @param id_hotel
      * @return
@@ -163,7 +163,7 @@ public class API {
     }
 
     /**
-     * Method  convert books to more comfort formate
+     * Method  convert books to more comfort format
      *
      * @param book
      * @return
@@ -256,6 +256,7 @@ public class API {
                 System.out.println(showAdaptedContentFromBooking(tempBook));
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

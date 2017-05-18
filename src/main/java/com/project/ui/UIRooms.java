@@ -33,28 +33,28 @@ public class UIRooms {
             switch (choice) {
                 case ITEM_1:
                     cls();
-                    addRoomHederDraw();
+                    addRoomHeaderDraw();
                     addRoomMenu();
                     System.out.println("Нажмите Enter ...");
                     scanner.nextLine();
                     break;
                 case ITEM_2:
                     cls();
-                    editRoomHederDraw();
+                    editRoomHeaderDraw();
                     editRoomMenu();
                     System.out.println("Нажмите Enter ...");
                     scanner.nextLine();
                     break;
                 case ITEM_3:
                     cls();
-                    deleteRoomByHotelHederDraw();
+                    deleteRoomByHotelHeaderDraw();
                     DeleteRoomMenu();
                     System.out.println("Нажмите Enter ...");
                     scanner.nextLine();
                     break;
                 case ITEM_4:
                     cls();
-                    findRoomByHotelHederDraw();
+                    findRoomByHotelHeaderDraw();
                     findRoomByHotel();
                     System.out.println("Нажмите Enter ...");
                     scanner.nextLine();
@@ -69,7 +69,7 @@ public class UIRooms {
         } while (!choice.equals(EXIT));
     }
 
-    private void editRoomHederDraw() {
+    private void editRoomHeaderDraw() {
         System.out.println("+-----------------------------------------+");
         System.out.println("|             EDIT ROOM MENU              |");
         System.out.println("+-----------------------------------------+\n");
@@ -122,7 +122,7 @@ public class UIRooms {
                     }
                     System.out.println("Цена : " + newPriceInteger);
                 }
-                roomsController.deleteRoomByHotelAndNumber(hotelForRoom,roomNumberInteger);
+                roomsController.deleteRoomByHotelAndNumber(hotelForRoom, roomNumberInteger);
                 roomsController.addRoom(new Room(hotelForRoom, roomNumberInteger, newNumberOfPersonInteger, newPriceInteger));
                 System.out.println("Данные комнаты обновлены");
 
@@ -132,7 +132,7 @@ public class UIRooms {
         }
     }
 
-    private void addRoomHederDraw() {
+    private void addRoomHeaderDraw() {
         System.out.println("+-----------------------------------------+");
         System.out.println("|              ADD ROOM MENU              |");
         System.out.println("+-----------------------------------------+\n");
@@ -198,7 +198,7 @@ public class UIRooms {
         }
     }
 
-    private void deleteRoomByHotelHederDraw() {
+    private void deleteRoomByHotelHeaderDraw() {
         System.out.println("+-----------------------------------------+");
         System.out.println("|            DELETE ROOM MENU             |");
         System.out.println("+-----------------------------------------+\n");
@@ -217,19 +217,19 @@ public class UIRooms {
             try {
                 roomNumberInteger = Integer.parseInt(roomNumber);
             } catch (NumberFormatException e) {
-
+                System.out.println(e.getMessage());
             }
 
             if (roomsController.RoomInHotelExist(hotelForRoom, roomNumberInteger)) {
                 roomsController.deleteRoomByHotelAndNumber(hotelForRoom, roomNumberInteger);
-                System.out.println("Комната добавлена");
+                System.out.println("Комната удалена");
             } else {
                 System.out.println("Такой комнаты нет");
             }
         }
     }
 
-    private void findRoomByHotelHederDraw() {
+    private void findRoomByHotelHeaderDraw() {
         System.out.println("+-----------------------------------------+");
         System.out.println("|              FIND ROOM MENU             |");
         System.out.println("+-----------------------------------------+\n");

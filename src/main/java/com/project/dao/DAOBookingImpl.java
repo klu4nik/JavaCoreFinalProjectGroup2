@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Entity.Booking;
+import entity.Booking;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,13 +12,13 @@ import java.util.*;
 
 /**
  * @version final :)
- *          Implementation of DAO Interface for working with Booking DB.
+ *          Implementation of dao Interface for working with Booking DB.
  *          DB stored in txt file (location of the file is described by constant "PATH")
  * @see DAO
- * @see DAO_Users_Impl_TXT
- * @see DAO_Hotels_Impl_TXT
+ * @see DAOUsersImpl
+ * @see DAOHotelsImpl
  */
-public class DAO_Booking_Impl_TXT implements DAO<HashMap<Integer, Booking>> {
+public class DAOBookingImpl implements DAO<HashMap<Integer, Booking>> {
     final static String PATH = "./ext/DB/Booking";
     final static char SEPARATOR = (char) 29;
 

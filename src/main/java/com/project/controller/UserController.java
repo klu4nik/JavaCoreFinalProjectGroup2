@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import DAO.DAO_Users_Impl_TXT;
-import Entity.User;
+import dao.DAOUsersImpl;
+import entity.User;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 
 /**
  * @version final :)
- *          Class-Controller. Provides functionality for working with the database of Users.
- * @see DAO_Users_Impl_TXT
+ *          Class-controller. Provides functionality for working with the database of Users.
+ * @see DAOUsersImpl
  */
 public class UserController {
     private HashMap<Integer, User> users;
-    private DAO_Users_Impl_TXT dui = new DAO_Users_Impl_TXT();
+    private DAOUsersImpl dui = new DAOUsersImpl();
 
     /**
      * Read DB from file and put data to the local variable.
@@ -85,7 +85,7 @@ public class UserController {
      * @return updated DB
      */
     public HashMap<Integer, User> deleteUserByLogin(String login) {
-        users.remove(login);
+        users.remove(findUserByLogin(login).getId());
         return users;
     }
 

@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -26,16 +26,16 @@ public class MainMenu {
 
             switch (choice) {
                 case ITEM_1:
-                    new UI_Users().run();
+                    new UIUsers().run();
                     break;
                 case ITEM_2:
-                    new UI_Hotels().run();
+                    new UIHotels().run();
                     break;
                 case ITEM_3:
-                    new UI_Rooms().run();
+                    new UIRooms().run();
                     break;
                 case ITEM_4:
-                    new UI_Booking().run();
+                    new UIBooking().run();
                     break;
                 case EXIT:
                     cls();

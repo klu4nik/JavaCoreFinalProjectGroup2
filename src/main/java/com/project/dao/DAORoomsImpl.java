@@ -1,8 +1,8 @@
-package DAO;
+package dao;
 
-import Entity.Hotel;
-import Entity.Room;
-import Entity.User;
+import entity.Hotel;
+import entity.Room;
+import entity.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,13 +16,13 @@ import java.util.StringTokenizer;
 
 /**
  * @version final :)
- *          Implementation of DAO Interface for working with Rooms DB.
+ *          Implementation of dao Interface for working with Rooms DB.
  *          DB stored in txt file (location of the file is described by constant "PATH")
  * @see DAO
- * @see DAO_Users_Impl_TXT
- * @see DAO_Hotels_Impl_TXT
+ * @see DAOUsersImpl
+ * @see DAOHotelsImpl
  */
-public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
+public class DAORoomsImpl implements DAO<HashMap<Integer, Room>> {
     final static String PATH = "./ext/DB/Rooms";
     final static char SEPARATOR = (char) 29;
 
@@ -37,14 +37,14 @@ public class DAO_Rooms_Impl_TXT implements DAO<HashMap<Integer, Room>> {
 //        читаем список отелей
         HashMap<Integer, Hotel> hotelsFromFile = new HashMap<Integer, Hotel>();
         try {
-            hotelsFromFile = new DAO_Hotels_Impl_TXT().get();
+            hotelsFromFile = new DAOHotelsImpl().get();
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);
         }
 //        читаем список Пользователей
         HashMap<Integer, User> usersFromFile = new HashMap<Integer, User>();
         try {
-            usersFromFile = new DAO_Users_Impl_TXT().get();
+            usersFromFile = new DAOUsersImpl().get();
         } catch (IOException e) {
             System.out.println("Impossible to read the file: " + PATH);
         }

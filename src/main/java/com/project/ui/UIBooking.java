@@ -1,9 +1,9 @@
-package UI;
+package ui;
 
-import API.API;
-import Entity.Booking;
-import Entity.Hotel;
-import Entity.Room;
+import api.API;
+import entity.Booking;
+import entity.Hotel;
+import entity.Room;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 /**
  * Created by Klu4nik on 03/05/2017.
  */
-public class UI_Booking {
+public class UIBooking {
     private final static String ITEM_1 = "1";
     private final static String ITEM_2 = "2";
     private final static String ITEM_3 = "3";
@@ -133,7 +133,7 @@ public class UI_Booking {
                         System.out.println("Бронь " + api.showAdaptedContentFromBooking(foundBooks.get(Integer.parseInt(choice))) + " удалена");
                         api.removeBook(foundBooks.get(Integer.parseInt(choice)));
                         api.flushBooking();
-                        new UI_Booking().AddBookingMenu();
+                        new UIBooking().AddBookingMenu();
 
                     } else System.out.println("Введите корректный номер в списке");
                 } catch (Exception e) {
@@ -278,7 +278,7 @@ public class UI_Booking {
                 cls();
                 return true;
             case EXIT:
-                new UI_Booking().drawMainMenu();
+                new UIBooking().drawMainMenu();
                 break;
         }
         return false;

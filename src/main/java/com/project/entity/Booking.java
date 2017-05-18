@@ -1,10 +1,10 @@
-package Entity;
+package entity;
 
 import java.util.Date;
 
 /**
  * @version final :)
- *          Entity-Class. Describes the entity of Booking.
+ *          entity-Class. Describes the entity of Booking.
  *          Have next fields:
  *          id - for identification entry in DB;
  *          user_id - for identification user in DB;

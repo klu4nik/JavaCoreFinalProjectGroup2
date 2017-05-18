@@ -1,11 +1,11 @@
-package Util;
+package util;
 
-import DAO.DAO_Hotels_Impl_TXT;
-import DAO.DAO_Rooms_Impl_TXT;
-import DAO.DAO_Users_Impl_TXT;
-import Entity.Hotel;
-import Entity.Room;
-import Entity.User;
+import dao.DAOHotelsImpl;
+import dao.DAORoomsImpl;
+import dao.DAOUsersImpl;
+import entity.Hotel;
+import entity.Room;
+import entity.User;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -21,7 +21,7 @@ public final class Filegenerator {
 
     public static void fileGenerator() throws NoSuchAlgorithmException, IOException, ClassNotFoundException {
         // -------------USER-----------------------
-        DAO_Users_Impl_TXT dui = new DAO_Users_Impl_TXT();
+        DAOUsersImpl dui = new DAOUsersImpl();
         HashMap hm = new HashMap<String, User>();
         for (int i = 1; i <= 100; i++) {
             User newUser = new User("First Name" + i, "Last Name" + i, "Login" + i, PasswordHashGenerator.generate(("pass" + i)));
@@ -30,8 +30,8 @@ public final class Filegenerator {
         dui.set(hm);
 // ------------END-USER-----------------------
 // ------------HOTEL-ROOM-----------------------
-        DAO_Hotels_Impl_TXT dhi = new DAO_Hotels_Impl_TXT();
-        DAO_Rooms_Impl_TXT dri = new DAO_Rooms_Impl_TXT();
+        DAOHotelsImpl dhi = new DAOHotelsImpl();
+        DAORoomsImpl dri = new DAORoomsImpl();
         HashMap hot = new HashMap<Integer, Hotel>();
         HashMap roo = new HashMap<Integer, Room>();
 

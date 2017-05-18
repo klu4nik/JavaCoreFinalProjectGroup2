@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import DAO.DAO_Booking_Impl_TXT;
-import Entity.Booking;
+import dao.DAOBookingImpl;
+import entity.Booking;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 
 /**
  * @version final :)
- *          Class-Controller. Provides functionality for working with the database of Booking.
- * @see DAO_Booking_Impl_TXT
+ *          Class-controller. Provides functionality for working with the database of Booking.
+ * @see DAOBookingImpl
  */
 public class BookingController {
     private HashMap<Integer, Booking> booking;
-    private DAO_Booking_Impl_TXT dbi = new DAO_Booking_Impl_TXT();
+    private DAOBookingImpl dbi = new DAOBookingImpl();
 
     /**
      * Read DB from file and put data to the local variable.

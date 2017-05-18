@@ -1,9 +1,9 @@
-package Entity;
+package entity;
 
 /**
  * @version final :)
  *          <p>
- *          Entity-Class. Describes the entity of HOTEL.
+ *          entity-Class. Describes the entity of HOTEL.
  *          Have next fields:
  *          id - for identification entry in DB;
  *          hotelName - Name of hotel;

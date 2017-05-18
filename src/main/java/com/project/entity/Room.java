@@ -1,8 +1,8 @@
-package Entity;
+package entity;
 
 /**
  * @version final :)
- *          Entity-Class. Describes the entity of ROOM.
+ *          entity-Class. Describes the entity of ROOM.
  *          Have next fields:
  *          hotel - Hotel where the Room is located;
  * @see Hotel

@@ -1,9 +1,8 @@
-package UI;
+package ui;
 
-import Controller.HotelsController;
-import Controller.RoomsController;
-import Entity.Hotel;
-import Entity.Room;
+import controller.RoomsController;
+import entity.Hotel;
+import entity.Room;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -12,7 +11,7 @@ import java.util.Scanner;
 /**
  * Created by MYKOLA.GOROKHOV on 30.04.2017.
  */
-public class UI_Rooms {
+public class UIRooms {
     private final static String ITEM_1 = "1";
     private final static String ITEM_2 = "2";
     private final static String ITEM_3 = "3";
@@ -81,8 +80,8 @@ public class UI_Rooms {
 
         if (hotelForRoom != null && roomsController.findRoomByHotel(hotelForRoom).size() != 0) {
             Integer roomNumberInteger = -1;
-            Integer newNumberOfPersonInteger;
-            Integer newPriceInteger;
+            Integer newNumberOfPersonInteger = -1;
+            Integer newPriceInteger = -1;
 
             System.out.println("Введите номер комнаты, которую надо редактировать :");
             Scanner scanner = new Scanner(System.in);
@@ -123,6 +122,9 @@ public class UI_Rooms {
                     }
                     System.out.println("Цена : " + newPriceInteger);
                 }
+                roomsController.deleteRoomByHotelAndNumber(hotelForRoom,roomNumberInteger);
+                roomsController.addRoom(new Room(hotelForRoom, roomNumberInteger, newNumberOfPersonInteger, newPriceInteger));
+                System.out.println("Данные комнаты обновлены");
 
             } else {
                 System.out.println("Такой комнаты нет");

@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Entity.User;
+import entity.User;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,11 +14,11 @@ import java.util.StringTokenizer;
 
 /**
  * @version final :)
- *          Implementation of DAO Interface for working with Users DB.
+ *          Implementation of dao Interface for working with Users DB.
  *          DB stored in txt file (location of the file is described by constant "PATH")
  * @see DAO
  */
-public class DAO_Users_Impl_TXT implements DAO<HashMap<Integer, User>> {
+public class DAOUsersImpl implements DAO<HashMap<Integer, User>> {
     final static String PATH = "./ext/DB/Users";
     final static char SEPARATOR = (char) 29;
 

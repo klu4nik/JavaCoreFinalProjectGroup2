@@ -1,8 +1,7 @@
-package Controller;
+package controller;
 
-import DAO.DAO_Hotels_Impl_TXT;
-import DAO.DAO_Rooms_Impl_TXT;
-import Entity.Hotel;
+import dao.DAOHotelsImpl;
+import entity.Hotel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,12 +10,12 @@ import java.util.stream.Collectors;
 
 /**
  * @version final :)
- *          Class-Controller. Provides functionality for working with the database of Hotels.
- * @see DAO_Hotels_Impl_TXT
+ *          Class-controller. Provides functionality for working with the database of Hotels.
+ * @see DAOHotelsImpl
  */
 public class HotelsController {
     private HashMap<Integer, Hotel> hotels;
-    private DAO_Hotels_Impl_TXT dhi = new DAO_Hotels_Impl_TXT();
+    private DAOHotelsImpl dhi = new DAOHotelsImpl();
 
     /**
      * Read DB from file and put data to the local variable.

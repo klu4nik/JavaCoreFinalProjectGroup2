@@ -1,7 +1,7 @@
-package UI;
+package ui;
 
-import Controller.HotelsController;
-import Entity.Hotel;
+import controller.HotelsController;
+import entity.Hotel;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 /**
  * Created by MYKOLA.GOROKHOV on 29.04.2017.
  */
-public class UI_Hotels {
+public class UIHotels {
     private final static String ITEM_1 = "1";
     private final static String ITEM_2 = "2";
     private final static String ITEM_3 = "3";

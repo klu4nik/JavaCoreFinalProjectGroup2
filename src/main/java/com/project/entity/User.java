@@ -1,12 +1,12 @@
-package Entity;
+package entity;
 
 
-import Util.PasswordHashGenerator;
+import util.PasswordHashGenerator;
 
 /**
  * @version final :)
  *          <p>
- *          Entity-Class. Describes the entity of USER.
+ *          entity-Class. Describes the entity of USER.
  *          Have next fields:
  *          id - for identification entry in DB;
  *          firstName - First Name of user;

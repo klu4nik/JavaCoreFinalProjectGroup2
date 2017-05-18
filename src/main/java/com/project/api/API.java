@@ -1,13 +1,13 @@
-package API;
+package api;
 
-import Controller.BookingController;
-import Controller.HotelsController;
-import Controller.RoomsController;
-import Controller.UserController;
-import Entity.Booking;
-import Entity.Hotel;
-import Entity.Room;
-import Entity.User;
+import controller.BookingController;
+import controller.HotelsController;
+import controller.RoomsController;
+import controller.UserController;
+import entity.Booking;
+import entity.Hotel;
+import entity.Room;
+import entity.User;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,10 +18,10 @@ import java.util.List;
  * Created by Savchuk Andrey on 05/05/2017.
  */
 public class API {
-    BookingController bookingController = new BookingController();
-    HotelsController hotelsController = new HotelsController();
-    UserController userController = new UserController();
-    RoomsController roomsController = new RoomsController();
+    private BookingController bookingController = new BookingController();
+    private HotelsController hotelsController = new HotelsController();
+    private UserController userController = new UserController();
+    private RoomsController roomsController = new RoomsController();
     private HashMap<Integer, Room> rooms;
 
 

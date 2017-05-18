@@ -1,5 +1,5 @@
-import UI.MainMenu;
-import Util.Filegenerator;
+import ui.MainMenu;
+import util.Filegenerator;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

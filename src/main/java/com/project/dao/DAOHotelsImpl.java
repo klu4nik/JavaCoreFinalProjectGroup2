@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Entity.Hotel;
+import entity.Hotel;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,11 +14,11 @@ import java.util.StringTokenizer;
 
 /**
  * @version final :)
- *          Implementation of DAO Interface for working with Hotels DB.
+ *          Implementation of dao Interface for working with Hotels DB.
  *          DB stored in txt file (location of the file is described by constant "PATH")
  * @see DAO
  */
-public class DAO_Hotels_Impl_TXT implements DAO<HashMap<Integer, Hotel>> {
+public class DAOHotelsImpl implements DAO<HashMap<Integer, Hotel>> {
     final static String PATH = "./ext/DB/Hotels";
     final static char SEPARATOR = (char) 29;
 
